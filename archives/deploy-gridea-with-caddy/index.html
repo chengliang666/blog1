@@ -1,0 +1,418 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords"
+                  content=""/>
+        <meta name="description" content="使用 Caddy 自动部署 Gridea 博客"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/github-markdown.css">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/post.css">
+            <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/github.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>使用 Caddy 自动部署 Gridea 博客 | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+
+        <div id="readProgress">
+            <div class="read-progress-bar" role="progressbar" style="width: 0"></div>
+        </div>
+
+    <div class="container px-lg-2 pb-3 bg-white">
+<section id="breadcrumb">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class="breadcrumb bg-transparent pl-lg-1 pl-2">
+            <li class="breadcrumb-item">
+                <a href="" class="text-dark font-weight-bold">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+            </li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/study-notes"
+                       class="text-dark font-weight-bold">学习笔记</a>
+                </li>
+            <li class="breadcrumb-item active" aria-current="page">使用 Caddy 自动部署 Gridea 博客</li>
+        </ol>
+    </nav>
+</section>
+        <div class="row">
+            <div id="left" class="col-lg-8 pr-xl-5 px-lg-3 px-4">
+<section id="content" class="mb-5">
+    <h1 id="contentTitle">使用 Caddy 自动部署 Gridea 博客</h1>
+    <small class="d-inline-block text-muted mt-2 ml-1">
+        <span class="mr-3">
+            <i class="fas fa-user mr-2"></i>Ryan Wang
+        </span>
+        <span class="mr-3">
+            <i class="far fa-calendar mr-2"></i>2019年10月13日
+        </span>
+        <span>
+            <i class="fas fa-eye mr-2"></i>1,448次浏览
+        </span>
+    </small>
+    <article class="markdown-body mt-4">
+        <html>
+ <head></head>
+ <body>
+  <blockquote> 
+   <p>Gridea 是一个静态博客客户端，也可以称之为博客生成器，和 Hexo 之类的静态博客生成器很类似，唯一不同的是，Gridea 提供了一个非常好的可视化界面，非常容易就可以完成一个博客的搭建，而且配置都是可视化的，所以对小白来说非常友好。但是目前 Gridea 仅支持部署到 Github 和 Coding，由于众所周知的原因，Github Pages 会偶尔出现访问不了的情况（而且访问相对较慢），而且百度是不收录 Github Pages 的站点的。Coding 的话，抽风就更严重了。所以下面介绍一种方式，可以自动部署到自己的服务器。</p> 
+  </blockquote> 
+  <h2 id="前言">前言</h2> 
+  <p>在开始之前，你至少需要了解 Gridea 如何部署到 Github，并且需要熟悉 Linux 的一些基本命令。对了，此方法基于 Github Pages，所以最好先在 Github Pages 上部署好博客。</p> 
+  <h2 id="gridea-客户端配置">Gridea 客户端配置</h2> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/c948ccfe138ceb0f95e92e72723cbfd6.png" alt="image.png"></p> 
+  <p>需要注意的是，这里的域名一定要填写为解析到自己服务器 ip 的地址。</p> 
+  <h2 id="服务器环境配置">服务器环境配置</h2> 
+  <blockquote> 
+   <p>在这里我使用 Ubuntu 16.04 作为演示，其他发行版大同小异。</p> 
+  </blockquote> 
+  <h3 id="安装-git">安装 Git</h3> 
+  <pre><code class="language-bash">sudo apt-get install git
+</code></pre> 
+  <h3 id="安装-caddy">安装 Caddy</h3> 
+  <blockquote> 
+   <p>Caddy 是一个使用 Go 语言编写的 web 服务器。如果需要详细了解，请访问：<a href="https://caddyserver.com">https://caddyserver.com</a> 在这里就不在赘述。</p> 
+  </blockquote> 
+  <pre><code class="language-bash"># 安装 Caddy
+curl https://getcaddy.com | bash -s personal http.git
+</code></pre> 
+  <pre><code class="language-bash"># 配置 systemd，方便管理 Caddy 的运行状态
+wget https://raw.githubusercontent.com/caddyserver/caddy/master/dist/init/linux-systemd/caddy.service
+sudo cp caddy.service /etc/systemd/system/
+sudo chown root:root /etc/systemd/system/caddy.service
+sudo chmod 644 /etc/systemd/system/caddy.service
+sudo systemctl daemon-reload
+sudo systemctl start caddy.service
+</code></pre> 
+  <h3 id="编写-caddyfile">编写 Caddyfile</h3> 
+  <blockquote> 
+   <p>Caddyfile 即 Caddy 的站点配置文件，类似于 Nginx 的 nginx.conf。</p> 
+  </blockquote> 
+  <pre><code class="language-bash">touch /etc/caddy/Caddyfile
+
+vim /etc/caddy/Caddyfile
+</code></pre> 
+  <pre><code class="language-text">https://[DOMAIN] {
+    tls [EMAIL]
+    gzip
+    root [ROOT]
+    git {GITHUB} {
+        path [ROOT]
+        hook /webhook [SECRET]
+        hook_type github
+        clone_args --recursive
+        pull_args --recurse-submodules
+    }
+}
+</code></pre> 
+  <p>配置详解：</p> 
+  <ol> 
+   <li>[DOMAIN]：即博客地址，需要注意是否已经将服务器 ip 以 A 记录的类型解析到域名。</li> 
+   <li>[EMAIL]：SSL 证书申请邮箱，填写自己的即可。</li> 
+   <li>[ROOT]：静态页面存放地址，如：/data/wwwroot/gridea</li> 
+   <li>[SECRET]：Github 的 webhook secret key，下面会详解如何获取。</li> 
+  </ol> 
+  <p>根据自己的实际情况填写完成之后应该是类似这个样子的：</p> 
+  <pre><code class="language-text">https://gridea.ryanc.cc {
+    tls i@ryanc.cc
+    gzip
+    root /data/wwwroot/gridea.ryanc.cc
+    git github.com/ruibaby/ruibaby.github.io {
+        path /data/wwwroot/gridea.ryanc.cc
+        hook /webhook 123456
+        hook_type github
+        clone_args --recursive
+        pull_args --recurse-submodules
+    }
+}
+</code></pre> 
+  <h3 id="github-的-webhook-设置">Github 的 Webhook 设置</h3> 
+  <blockquote> 
+   <p>为啥需要设置这个？因为我们需要做到每次更新到 Github Pages 的时候，让 Caddy 知道有更新，然后会自动拉取最新的静态页面资源，完成自动更新网站内容。</p> 
+  </blockquote> 
+  <p>找到部署的仓库，然后选择 Settings -&gt; Webhooks。点击 Add Webhook。</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/139402b4c4a6437c6b56299085217358.png" alt="image.png"></p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/7fb5a1274050e4b5918dcad542ee7550.png" alt="image.png"></p> 
+  <ol> 
+   <li>Payload URL 的填写规则为：博客地址/webhook。</li> 
+   <li>Secret 自行设置。</li> 
+   <li>然后点击 Add webhook 即可。</li> 
+   <li>将填写好的 Secret 填写到上面 Caddyfile 的 [SECRET]。</li> 
+  </ol> 
+  <h3 id="启动-caddy">启动 Caddy</h3> 
+  <p>进行到这里，我们只需要启动 Caddy 服务即可。</p> 
+  <pre><code class="language-bash"># 开机自启 Caddy
+sudo systemctl enable caddy.service
+</code></pre> 
+  <pre><code class="language-bash"># 启动 Caddy
+sudo service caddy start
+</code></pre> 
+  <pre><code class="language-bash"># 重启 Caddy
+sudo service caddy restart
+</code></pre> 
+  <pre><code class="language-bash"># 停止 Caddy
+sudo service caddy stop
+</code></pre> 
+  <h2 id="结尾">结尾</h2> 
+  <p>其实这种方式适用于任何部署在 Github Pages 的静态博客，有兴趣的小伙伴可以自己去折腾试试。</p> 
+ </body>
+</html>
+    </article>
+</section>
+<section id="changePost" class="mb-5">
+    <div class="d-flex px-1 flex-md-row flex-column">
+            <a id="prePost" class="mr-auto font-weight-bold" href="/archives/flarum-install-and-config">
+                <span class="icon mr-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-left"></i>
+                </span>
+                <span class="icon mr-2 d-md-none d-inline">
+                    上一篇：
+                </span>
+                Flarum 的安装与配置
+            </a>
+            <a id="nextPost" class="font-weight-bold mt-md-0 mt-3" href="/archives/try-ifttt">
+                <span class="icon mr-2 d-md-none d-inline">
+                    下一篇：
+                </span>
+                玩玩 IFTTT
+                <span class="icon ml-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
+            </a>
+    </div>
+</section>
+<div class="social-share-cs mb-5"></div>
+
+<section id="comment" class="mb-5">
+        <div>
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="http://localhost:8090/halo-comment.min.js?version=1.1.2"></script>
+        <halo-comment id="253" type="post"/>
+        </div>
+</section>            </div>
+            <div id="right" class="col-lg-4">
+
+            <section id="recommend" class="mb-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list-ul mr-2"></i>相关推荐</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                                    <a href="/archives/sql-99-biao"
+                                       class="list-group-item list-group-item-action">SQL变量和循环用法的体现-打印九九乘法表
+                                    </a>
+                                    <a href="/archives/halo-add-html-page"
+                                       class="list-group-item list-group-item-action">Halo-自助添加HTML静态页面
+                                    </a>
+                                    <a href="/archives/halo-star-100"
+                                       class="list-group-item list-group-item-action">Halo-Star过百
+                                    </a>
+                                    <a href="/archives/maven-use"
+                                       class="list-group-item list-group-item-action">Maven 使用笔记
+                                    </a>
+                                    <a href="/archives/halo-is-coming"
+                                       class="list-group-item list-group-item-action">Halo is coming。
+                                    </a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+<section id="catalogBox" class="d-none">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-book mr-2"></i>文章目录
+        </div>
+        <div id="catalogs" class="card-body p-0 pl-3">
+        </div>
+    </div>
+</section>            </div>
+        </div>
+    </div>
+
+        <div id="catalogButton" class="d-lg-none d-none">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
+        <div id="catalogOverBox" class="d-lg-none"></div>
+
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+        <script>
+            var displayReadProgress = true;
+            var displayLineNumber = true;
+            var enableCodeCopy = true;
+            var displayCodeType = true;
+            var displayMobileCatalog = true;
+            var linkOnBlackPage = true;
+            var enableShare = true;
+            var twitterAccountShare = ``;
+            var postTitle = `使用 Caddy 自动部署 Gridea 博客`;
+            var blogTitle = `Ryan Wang's Blog`;
+            var blogUrl = ``;
+        </script>
+        <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="/codelunatic_simple/source/js/post.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>

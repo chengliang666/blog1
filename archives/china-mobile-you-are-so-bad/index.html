@@ -1,0 +1,345 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords"
+                  content="水文"/>
+        <meta name="description" content="中国移动，你太坏了。"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/github-markdown.css">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/post.css">
+            <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/github.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>中国移动，你太坏了。 | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+
+        <div id="readProgress">
+            <div class="read-progress-bar" role="progressbar" style="width: 0"></div>
+        </div>
+
+    <div class="container px-lg-2 pb-3 bg-white">
+<section id="breadcrumb">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class="breadcrumb bg-transparent pl-lg-1 pl-2">
+            <li class="breadcrumb-item">
+                <a href="" class="text-dark font-weight-bold">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+            </li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/notes"
+                       class="text-dark font-weight-bold">日志</a>
+                </li>
+            <li class="breadcrumb-item active" aria-current="page">中国移动，你太坏了。</li>
+        </ol>
+    </nav>
+</section>
+        <div class="row">
+            <div id="left" class="col-lg-8 pr-xl-5 px-lg-3 px-4">
+<section id="content" class="mb-5">
+    <h1 id="contentTitle">中国移动，你太坏了。</h1>
+    <small class="d-inline-block text-muted mt-2 ml-1">
+        <span class="mr-3">
+            <i class="fas fa-user mr-2"></i>Ryan Wang
+        </span>
+        <span class="mr-3">
+            <i class="far fa-calendar mr-2"></i>2019年09月25日
+        </span>
+        <span>
+            <i class="fas fa-eye mr-2"></i>1,528次浏览
+        </span>
+    </small>
+    <article class="markdown-body mt-4">
+        <html>
+ <head></head>
+ <body>
+  <h2 id="起因">起因</h2> 
+  <p>本人于今年五月份左右办理了 <code>中国移动</code> 的电话卡，至于为啥要办移动的卡呢？是因为我一直都想逃离 <code>中国联通</code> 这个坑。你能想象去商店里买东西付款的时候木有信号吗？所以，我就办了张移动卡以作为备用，然后慢慢从联通切过去。毕竟我联通卡用了好长一段时间了，什么都绑定的这张卡。要先换绑，然后在换卡，这是常识。</p> 
+  <h2 id="经过">经过</h2> 
+  <p>使用过程中，一直好好的，话费我也有好好地交，尽管不常用。而且一直是放在备用机上面的，偶尔开机使用一下。结果到了九月份的时候，突然就给我停机了，拨打电话提示“您已停机，请续交话费”，我开始天真的以为是没有话费了，然后我分几次差不多冲了100左右的话费。结果还是“您已停机，请续交话费”。然后我就拨打 10086 查询了一次话费，提示还有余额。这就奇怪了，为啥有余额还是停机呢？于是上网搜了搜，大部分都说是“停机保号”，一般一天左右就恢复。就这样我等了几天，还是木有恢复。</p> 
+  <p>然后在某个风和日丽的早上我打了 10086 人工客服，对方称并不是所谓的“停机保号”，而是我在试用期间违规发送大量短信和拨打了违规电话。于是乎，我就要求提供详细的通话记录以及短信记录。对方说不能提供。也就是说，说我作恶，又不提供证据？就像是我说你在外面有几个私生子，你问我证据，我说不能提供。一个意思是吗？</p> 
+  <p>客服给我的解决方案是叫我去当地的营业厅提交一张免冠照，然后就给我开通。我说我没在号码归属地，他让我把我免冠照发送到他们邮箱。WTF，凭啥？店大欺客是吧。</p> 
+  <h2 id="结果">结果</h2> 
+  <p>我去黑猫投诉查询了一下 10086 栏目下的投诉记录，发现不少和我类似的经历，于是乎我也投诉了一遍。希望能快些处理。</p> 
+  <h2 id="后话">后话</h2> 
+  <p>这到底是 <code>中国移动</code> 的系统错误还是他们故意作恶？如果是系统错误，为什么还不修复？你可是三大运营商之首啊，技术这么垃圾？如果是故意作恶，那我倒是能理解了。不作恶怎么赚钱嘛，是吧？</p> 
+  <h2 id="附">附</h2> 
+  <p>黑猫投诉中国移动栏目链接：<a href="https://tousu.sina.com.cn/company/view/?couid=1991428685">https://tousu.sina.com.cn/company/view/?couid=1991428685</a></p> 
+ </body>
+</html>
+    </article>
+</section>
+<section id="changePost" class="mb-5">
+    <div class="d-flex px-1 flex-md-row flex-column">
+            <a id="prePost" class="mr-auto font-weight-bold" href="/archives/try-ifttt">
+                <span class="icon mr-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-left"></i>
+                </span>
+                <span class="icon mr-2 d-md-none d-inline">
+                    上一篇：
+                </span>
+                玩玩 IFTTT
+            </a>
+            <a id="nextPost" class="font-weight-bold mt-md-0 mt-3" href="/archives/record-how-to-save-my-blog">
+                <span class="icon mr-2 d-md-none d-inline">
+                    下一篇：
+                </span>
+                记一次拯救我的博客
+                <span class="icon ml-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
+            </a>
+    </div>
+</section>
+<div class="social-share-cs mb-5"></div>
+
+<section id="comment" class="mb-5">
+        <div>
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="http://localhost:8090/halo-comment.min.js?version=1.1.2"></script>
+        <halo-comment id="249" type="post"/>
+        </div>
+</section>            </div>
+            <div id="right" class="col-lg-4">
+        <section id="tags" class="mb-lg-4 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tags mr-2"></i>相关标签
+                </div>
+                <div class="card-body">
+                        <div class="tag">
+                            <a href="/tags/diving" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>水文
+                                </span>
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+            <section id="recommend" class="mb-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list-ul mr-2"></i>相关推荐</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                                    <a href="/archives/lai-shen-zhen-yi-yue-hou-you-gan"
+                                       class="list-group-item list-group-item-action">来深圳一月后有感
+                                    </a>
+                                    <a href="/archives/1555381003047"
+                                       class="list-group-item list-group-item-action">正确提问方式
+                                    </a>
+                                    <a href="/archives/2018-summary"
+                                       class="list-group-item list-group-item-action">2018 年个人总结
+                                    </a>
+                                    <a href="/archives/record-how-to-save-my-blog"
+                                       class="list-group-item list-group-item-action">记一次拯救我的博客
+                                    </a>
+                                    <a href="/archives/china-mobile-you-are-so-bad"
+                                       class="list-group-item list-group-item-action">中国移动，你太坏了。
+                                    </a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+<section id="catalogBox" class="d-none">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-book mr-2"></i>文章目录
+        </div>
+        <div id="catalogs" class="card-body p-0 pl-3">
+        </div>
+    </div>
+</section>            </div>
+        </div>
+    </div>
+
+        <div id="catalogButton" class="d-lg-none d-none">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
+        <div id="catalogOverBox" class="d-lg-none"></div>
+
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+        <script>
+            var displayReadProgress = true;
+            var displayLineNumber = true;
+            var enableCodeCopy = true;
+            var displayCodeType = true;
+            var displayMobileCatalog = true;
+            var linkOnBlackPage = true;
+            var enableShare = true;
+            var twitterAccountShare = ``;
+            var postTitle = `中国移动，你太坏了。`;
+            var blogTitle = `Ryan Wang's Blog`;
+            var blogUrl = ``;
+        </script>
+        <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="/codelunatic_simple/source/js/post.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>

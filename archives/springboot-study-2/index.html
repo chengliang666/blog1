@@ -1,0 +1,428 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords"
+                  content="Java,SpringBoot"/>
+        <meta name="description" content="Spring Boot 学习笔记（二）"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/github-markdown.css">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/post.css">
+            <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/github.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>Spring Boot 学习笔记（二） | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+
+        <div id="readProgress">
+            <div class="read-progress-bar" role="progressbar" style="width: 0"></div>
+        </div>
+
+    <div class="container px-lg-2 pb-3 bg-white">
+<section id="breadcrumb">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class="breadcrumb bg-transparent pl-lg-1 pl-2">
+            <li class="breadcrumb-item">
+                <a href="" class="text-dark font-weight-bold">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+            </li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/study-notes"
+                       class="text-dark font-weight-bold">学习笔记</a>
+                </li>
+            <li class="breadcrumb-item active" aria-current="page">Spring Boot 学习笔记（二）</li>
+        </ol>
+    </nav>
+</section>
+        <div class="row">
+            <div id="left" class="col-lg-8 pr-xl-5 px-lg-3 px-4">
+<section id="content" class="mb-5">
+    <h1 id="contentTitle">Spring Boot 学习笔记（二）</h1>
+    <small class="d-inline-block text-muted mt-2 ml-1">
+        <span class="mr-3">
+            <i class="fas fa-user mr-2"></i>Ryan Wang
+        </span>
+        <span class="mr-3">
+            <i class="far fa-calendar mr-2"></i>2017年12月03日
+        </span>
+        <span>
+            <i class="fas fa-eye mr-2"></i>969次浏览
+        </span>
+    </small>
+    <article class="markdown-body mt-4">
+        <html>
+ <head></head>
+ <body>
+  <blockquote> 
+   <p>上一篇笔记简单的讲了一下SpringBoot项目的创建，以及如何启动。这次笔记主要记录一下application.properties配置文件的简单配置。SpringBoot对于SpringMVC最大的改变就是将很多xml配置文件给干掉了，主要通过application.properties和注解来配置，可以使整个项目结构看起来更加简洁。注：这篇笔记使用application.properties。</p> 
+  </blockquote> 
+  <h2 id="配置文件简述">配置文件简述</h2> 
+  <h3 id="配置文件类型">配置文件类型</h3> 
+  <p>SpringBoot支持两种配置文件格式，一种是默认的application.properties，还有一种是更为简单方便的application.yaml（推荐）。yaml是一种以数据为中心的配置格式，在配置数据的时候具有面向对象的特征。通过下面的示例可以看出其中的区别：</p> 
+  <p>application.properties：</p> 
+  <pre><code class="language-properties">server.port=8090
+server.context-path=/demo
+</code></pre> 
+  <p>application.yaml：</p> 
+  <pre><code class="language-yaml"># 需要注意的是属性和参数之间必须有一个空格隔开，不能是一个tab，也不能没有空格
+server:
+&nbsp;&nbsp;port: 8090
+&nbsp;&nbsp;context-path: /demo
+</code></pre> 
+  <p>可以看到，yaml明显更简洁，而且结构感更强，其中server.port是设置的访问端口号，server.context-path是设置的访问路径（默认为/）。需要注意的是，目前IDEA在yaml配置文件中提供了自动提示。</p> 
+  <h3 id="命令行参数配置">命令行参数配置</h3> 
+  <p>上一篇笔记已经讲了，运行SpringBoot项目只需要执行<code>java -jar 包名.jar</code>就可以运行了，其实还可以这样干，<code>java -jar 包名.jar --server.port=9999</code>，这样就可以将默认端口改成9999。</p> 
+  <h3 id="自定义属性">自定义属性</h3> 
+  <p>application.properties可以自定义属性，并在Controller类中调用，如：</p> 
+  <p>application.properties</p> 
+  <pre><code class="language-properties">man.name=Jack
+man.age=18
+man.sex=male
+</code></pre> 
+  <p>新建一个Controller类</p> 
+  <pre><code class="language-java">@RestController
+public class DemoController {
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//通过@Value注解获取配置文件对应的参数并且赋值给变量
+&nbsp;&nbsp;&nbsp;&nbsp;@Value("${man.name}")
+&nbsp;&nbsp;&nbsp;&nbsp;private String name;
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Value("${man.age}")
+&nbsp;&nbsp;&nbsp;&nbsp;private Integer age;
+
+&nbsp;&nbsp;&nbsp;&nbsp;@Value("${man.sex}")
+&nbsp;&nbsp;&nbsp;&nbsp;private String sex;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//设置访问路径
+&nbsp;&nbsp;&nbsp;&nbsp;@RequestMapping(value = "/")
+&nbsp;&nbsp;&nbsp;&nbsp;public String index(){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "姓名："+name+"，年龄："+age+"，性别："+sex;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+</code></pre> 
+  <p>执行Application类，访问<code>localhost:8080</code>就可以看到<code>姓名：Jack，年龄：18，性别：male</code>。</p> 
+  <h3 id="profile配置">Profile配置</h3> 
+  <p>Profile是Spring用来针对不同环境对不同的配置提供支持的，全局Profile配置使用<code>application</code><span profile="">-</span>.properties(如application-prod.properties)。通过在application.properties中设置<code>spring.profiles.active=prod</code>来指定活动的Profile。</p> 
+  <p>如：</p> 
+  <p>我们新建两个配置文件application-prod.properties（生产环境），application-dev.properties（开发环境），用来模拟生产环境和开发环境配置不一样的情况。</p> 
+  <p>如端口配置：</p> 
+  <pre><code class="language-properties">//application-prod.properties
+server.port=80
+</code></pre> 
+  <pre><code class="language-properties">//application-dev.properties
+server.port=8080
+</code></pre> 
+  <p>然后在默认的application.properties中配置<code>spring.profiles.active=dev</code>，然后启动项目所访问的路径就是<code>localhost:8080</code>，同样设置为prod的话，访问路径就是<code>localhost:80</code>。</p> 
+  <blockquote> 
+   <p>上面的配置只是一些很简单的配置，学到后面的时候还会有更多的配置需要学，目前为止掌握这些就够了。现在还没有涉及到数据库的操作，到了数据库和JPA操作的时候，还会说到一些配置的。</p> 
+  </blockquote> 
+  <h2 id="有趣的banner自定义">有趣的banner自定义</h2> 
+  <p>大家应该在启动项目的时候注意到了控制台输出有Spring的图案，其实这个是可以自定义的。</p> 
+  <p>只需要在<code>src/main/resources</code>下新建一个banner.txt，然后写入你想显示的图案就行了。可以通过<a href="http://patorjk.com/software/taag">http://patorjk.com/software/taag</a>这个网站来生成字符。如写入Hello World，然后将生成的字符复制到banner.txt中就可以了。如下图：</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/springboot-study-2/banner.png" alt=""></p> 
+  <p>值得注意的是，自定义banner还有一些属性可以设置：</p> 
+  <pre><code class="language-Yams">${AnsiColor.BRIGHT_RED}：用于设置设置控制台中输出内容的颜色(放在内容之前)
+${application.version}：获取MANIFEST.MF文件中的版本号
+${application.formatted-version}：获取格式化后的${application.version}版本信息
+${spring-boot.version}：获取Spring Boot的版本号
+${spring-boot.formatted-version}：获取格式化后的Spring Boot版本信息
+</code></pre> 
+  <p>例如：</p> 
+  <pre><code class="language-Yams">${AnsiColor.BLUE}
+&nbsp;&nbsp;___ ___ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.__ &nbsp;.__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.___
+&nbsp;/ &nbsp;&nbsp;| &nbsp;&nbsp;\ &nbsp;&nbsp;____ | &nbsp;| | &nbsp;| &nbsp;&nbsp;____ &nbsp;&nbsp;/ &nbsp;\ &nbsp;&nbsp;&nbsp;/ &nbsp;\___________| &nbsp;| &nbsp;&nbsp;&nbsp;__| _/
+/ &nbsp;&nbsp;&nbsp;~ &nbsp;&nbsp;&nbsp;\_/ __ \| &nbsp;| | &nbsp;| &nbsp;/ &nbsp;_ \ &nbsp;\ &nbsp;&nbsp;\/\/ &nbsp;&nbsp;/ &nbsp;_ \_ &nbsp;__ \ &nbsp;| &nbsp;&nbsp;/ __ |
+\ &nbsp;&nbsp;&nbsp;Y &nbsp;&nbsp;&nbsp;/\ &nbsp;___/| &nbsp;|_| &nbsp;|_( &nbsp;&lt;_&gt; ) &nbsp;\ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( &nbsp;&lt;_&gt; ) &nbsp;| \/ &nbsp;|__/ /_/ |
+&nbsp;\___|_ &nbsp;/ &nbsp;\___ &nbsp;&gt;____/____/\____/ &nbsp;&nbsp;&nbsp;\__/\ &nbsp;/ \____/|__| &nbsp;|____/\____ |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\/
+${AnsiColor.BRIGHT_YELLOW}
+${spring-boot.version}
+</code></pre> 
+  <p>启动：</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/springboot-study-2/banner-properties.png" alt=""></p> 
+  <p>本次就记录到这里吧，后面这个笔记系列会一直更新下去的。</p> 
+ </body>
+</html>
+    </article>
+</section>
+<section id="changePost" class="mb-5">
+    <div class="d-flex px-1 flex-md-row flex-column">
+            <a id="prePost" class="mr-auto font-weight-bold" href="/archives/springboot-study-jpa">
+                <span class="icon mr-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-left"></i>
+                </span>
+                <span class="icon mr-2 d-md-none d-inline">
+                    上一篇：
+                </span>
+                Spring Boot学习笔记（三）之JPA
+            </a>
+            <a id="nextPost" class="font-weight-bold mt-md-0 mt-3" href="/archives/springboot-study-1">
+                <span class="icon mr-2 d-md-none d-inline">
+                    下一篇：
+                </span>
+                Spring Boot 学习笔记（一）
+                <span class="icon ml-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
+            </a>
+    </div>
+</section>
+<div class="social-share-cs mb-5"></div>
+
+<section id="comment" class="mb-5">
+        <div>
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="http://localhost:8090/halo-comment.min.js?version=1.1.2"></script>
+        <halo-comment id="34" type="post"/>
+        </div>
+</section>            </div>
+            <div id="right" class="col-lg-4">
+        <section id="tags" class="mb-lg-4 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tags mr-2"></i>相关标签
+                </div>
+                <div class="card-body">
+                        <div class="tag">
+                            <a href="/tags/java" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>Java
+                                </span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/springboot" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>SpringBoot
+                                </span>
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+            <section id="recommend" class="mb-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list-ul mr-2"></i>相关推荐</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                                    <a href="/archives/sql-99-biao"
+                                       class="list-group-item list-group-item-action">SQL变量和循环用法的体现-打印九九乘法表
+                                    </a>
+                                    <a href="/archives/halo-add-html-page"
+                                       class="list-group-item list-group-item-action">Halo-自助添加HTML静态页面
+                                    </a>
+                                    <a href="/archives/halo-star-100"
+                                       class="list-group-item list-group-item-action">Halo-Star过百
+                                    </a>
+                                    <a href="/archives/maven-use"
+                                       class="list-group-item list-group-item-action">Maven 使用笔记
+                                    </a>
+                                    <a href="/archives/halo-is-coming"
+                                       class="list-group-item list-group-item-action">Halo is coming。
+                                    </a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+<section id="catalogBox" class="d-none">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-book mr-2"></i>文章目录
+        </div>
+        <div id="catalogs" class="card-body p-0 pl-3">
+        </div>
+    </div>
+</section>            </div>
+        </div>
+    </div>
+
+        <div id="catalogButton" class="d-lg-none d-none">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
+        <div id="catalogOverBox" class="d-lg-none"></div>
+
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+        <script>
+            var displayReadProgress = true;
+            var displayLineNumber = true;
+            var enableCodeCopy = true;
+            var displayCodeType = true;
+            var displayMobileCatalog = true;
+            var linkOnBlackPage = true;
+            var enableShare = true;
+            var twitterAccountShare = ``;
+            var postTitle = `Spring Boot 学习笔记（二）`;
+            var blogTitle = `Ryan Wang's Blog`;
+            var blogUrl = ``;
+        </script>
+        <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="/codelunatic_simple/source/js/post.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>

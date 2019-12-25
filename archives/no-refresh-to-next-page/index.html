@@ -1,0 +1,522 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords"
+                  content="Halo,JavaScript"/>
+        <meta name="description" content="无刷新加载下一页方案解析"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/github-markdown.css">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/post.css">
+            <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/github.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>无刷新加载下一页方案解析 | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+
+        <div id="readProgress">
+            <div class="read-progress-bar" role="progressbar" style="width: 0"></div>
+        </div>
+
+    <div class="container px-lg-2 pb-3 bg-white">
+<section id="breadcrumb">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class="breadcrumb bg-transparent pl-lg-1 pl-2">
+            <li class="breadcrumb-item">
+                <a href="" class="text-dark font-weight-bold">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+            </li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/study-notes"
+                       class="text-dark font-weight-bold">学习笔记</a>
+                </li>
+            <li class="breadcrumb-item active" aria-current="page">无刷新加载下一页方案解析</li>
+        </ol>
+    </nav>
+</section>
+        <div class="row">
+            <div id="left" class="col-lg-8 pr-xl-5 px-lg-3 px-4">
+<section id="content" class="mb-5">
+    <h1 id="contentTitle">无刷新加载下一页方案解析</h1>
+    <small class="d-inline-block text-muted mt-2 ml-1">
+        <span class="mr-3">
+            <i class="fas fa-user mr-2"></i>Ryan Wang
+        </span>
+        <span class="mr-3">
+            <i class="far fa-calendar mr-2"></i>2018年12月06日
+        </span>
+        <span>
+            <i class="fas fa-eye mr-2"></i>2,041次浏览
+        </span>
+    </small>
+    <article class="markdown-body mt-4">
+        <html>
+ <head></head>
+ <body>
+  <blockquote> 
+   <p>前段时间移植了一个Ghost的主题的时候（就是我现在用的这个），发现这个下拉加载下一页特别有意思，只用了短短几行代码，且后端没有重写请求方法，就轻而易举的实现了，于是乎就简单分析了一下。以供有需要的人参考一下。</p> 
+  </blockquote> 
+  <h1 id="之前是这样做的">之前是这样做的</h1> 
+  <p>我之前做这种无刷新加载下一页都是用的字符串拼接，把html代码和新的数据拼接起来然后append进去。这种方法虽然可以实现功能，但是有很多缺点，比如如果修改了页面的样式，那么很可能就要重新写拼接的字符串，而且整个代码看起来非常不好看（我有代码洁癖）。就像下面代码一样，宛如一坨shit...</p> 
+  <pre><code class="language-javascript">$.each(data,function (n,value) {
+	$('.post-list').append('' +
+			'&lt;div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 post-list-item" data-aos="fade-up"&gt;\n' +
+			'&lt;div class="post-item-main"&gt;\n' +
+			'&lt;a href="/archives/'+value.postUrl+'"&gt;\n' +
+			'&lt;div class="post-item-thumbnail lazy" style="background-image: url(/halo/source/img/pic12.jpg)"&gt;&lt;/div&gt;\n' +
+			'&lt;/a&gt;\n' +
+			'&lt;div class="post-item-info"&gt;\n' +
+			'&lt;div class="post-info-title"&gt;\n' +
+			'&lt;a href="/archives/'+value.postUrl+'"&gt;&lt;span&gt;'+value.postTitle+'&lt;/span&gt;&lt;/a&gt;&lt;br&gt;\n' +
+			'&lt;/div&gt;\n' +
+			'&lt;div&gt;\n' +
+			'&lt;span class="post-info-desc"&gt;\n' +
+			''+value.postSummary+'...' +
+			'&lt;/span&gt;\n' +
+			'&lt;/div&gt;\n' +
+			'&lt;div class="post-info-other" style="text-align: right"&gt;\n' +
+			'&lt;a href="#"&gt;MORE&gt;&lt;/a&gt;\n' +
+			'&lt;/div&gt;\n' +
+			'&lt;/div&gt;\n' +
+			'&lt;/div&gt;\n' +
+			'&lt;/div&gt;'
+	);
+});
+</code></pre> 
+  <h1 id="新学到的方法">新学到的方法</h1> 
+  <p>废话少说，先上代码，地址<a href="https://github.com/TryGhost/Casper/blob/master/assets/js/infinitescroll.js">https://github.com/TryGhost/Casper/blob/master/assets/js/infinitescroll.js</a>。</p> 
+  <pre><code class="language-javascript">/* global maxPages */
+var maxPages = parseInt(totalPages);
+
+// Code snippet inspired by https://github.com/douglasrodrigues5/ghost-blog-infinite-scroll
+$(function ($) {
+    var currentPage = 1;
+    var pathname = window.location.pathname;
+    var $document = $(document);
+    var $result = $('.post-feed');
+    var buffer = 300;
+
+    var ticking = false;
+    var isLoading = false;
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $document.height();
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $document.height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(infiniteScroll);
+        }
+        ticking = true;
+    }
+
+    function sanitizePathname(path) {
+        var paginationRegex = /(?:page\/)(\d)(?:\/)$/i;
+
+        // remove hash params from path
+        path = path.replace(/#(.*)$/g, '').replace('////g', '/');
+
+        // remove pagination from the path and replace the current pages
+        // with the actual requested page. E. g. `/page/3/` indicates that
+        // the user actually requested page 3, so we should request page 4
+        // next, unless it's the last page already.
+        if (path.match(paginationRegex)) {
+            currentPage = parseInt(path.match(paginationRegex)[1]);
+
+            path = path.replace(paginationRegex, '');
+        }
+
+        return path;
+    }
+
+    function infiniteScroll() {
+        // sanitize the pathname from possible pagination or hash params
+        pathname = sanitizePathname(pathname);
+
+        // return if already loading
+        if (isLoading) {
+            return;
+        }
+
+        // return if not scroll to the bottom
+        if (lastScrollY + lastWindowHeight &lt;= lastDocumentHeight - buffer) {
+            ticking = false;
+            return;
+        }
+
+        /**
+        * maxPages is defined in default.hbs and is the value
+        * of the amount of pagination pages.
+        * If we reached the last page or are past it,
+        * we return and disable the listeners.
+        */
+        if (currentPage &gt;= maxPages) {
+            window.removeEventListener('scroll', onScroll, {passive: true});
+            window.removeEventListener('resize', onResize);
+            return;
+        }
+
+        isLoading = true;
+
+        // next page
+        currentPage += 1;
+
+        // Load more
+        var nextPage = pathname + 'page/' + currentPage + '/';
+
+        $.get(nextPage, function (content) {
+            var parse = document.createRange().createContextualFragment(content);
+            var posts = parse.querySelectorAll('.post');
+            if (posts.length) {
+                [].forEach.call(posts, function (post) {
+                    $result[0].appendChild(post);
+                });
+            }
+        }).fail(function (xhr) {
+            // 404 indicates we've run out of pages
+            if (xhr.status === 404) {
+                window.removeEventListener('scroll', onScroll, {passive: true});
+                window.removeEventListener('resize', onResize);
+            }
+        }).always(function () {
+            lastDocumentHeight = $document.height();
+            isLoading = false;
+            ticking = false;
+        });
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize);
+
+    infiniteScroll();
+});
+</code></pre> 
+  <p>我们知道的是，很多CMS系统，博客系统（Wordpress，typecho，Hexo等）的下一页路径几乎都是<code>/page/页码</code>，所以上面的方法几乎可以通用，就算不是，改改也是可以的。好了，下面详细来解析一下上面的代码吧。</p> 
+  <h2 id="获取总页数">获取总页数</h2> 
+  <p>在最上面有一行代码<code>var maxPages = parseInt(totalPages);</code> 是用于定义总页数的，不知道？那么想办法后端返回一个吧，这个有什么用呢？看下面：</p> 
+  <pre><code class="language-javascript">if (currentPage &gt;= maxPages) {
+	window.removeEventListener('scroll', onScroll, {passive: true});
+	window.removeEventListener('resize', onResize);
+	return;
+}
+</code></pre> 
+  <p>就是说当当前页面大于等于总页数的的时候就停止执行下面的代码，而下面的代码则是加载下一页的，所以说需要有这个判断，当获取到最后一页的时候就停止获取。</p> 
+  <h2 id="加载下一页">加载下一页</h2> 
+  <p>可以看到，方法的最上面定义了一个变量<code>var currentPage = 1;</code>，这个变量代表着第一页的页码，当页面滑动到最底部的时候就会调用<code>infiniteScroll</code>方法，并且给<code>currentPage</code>加上一，然后就请求下一页的数据。此时的请求路径也就是<code>/page/2</code>。</p> 
+  <h2 id="解析请求的路径">解析请求的路径</h2> 
+  <p>我们看到这一段：</p> 
+  <pre><code class="language-javascript">$.get(nextPage, function (content) {
+	var parse = document.createRange().createContextualFragment(content);
+	var posts = parse.querySelectorAll('.post');
+	if (posts.length) {
+		[].forEach.call(posts, function (post) {
+			$result[0].appendChild(post);
+		});
+	}
+})
+</code></pre> 
+  <p>使用get方式请求下一页的数据，需要注意的是，虽然是使用ajax请求的，但是是请求的下一页整个页面的内容，所以请求获得的数据便是整个页面的html代码。所以这里使用到了<code>querySelectorAll</code>这个方法，截取全部以<code>post</code>类的html代码，并存入<code>posts</code>变量中，然后在遍历<code>posts</code>，得到单个文章列表项，最后再追加到页面中，整个过程一气呵成。</p> 
+  <h2 id="总结">总结</h2> 
+  <p>整个获取下一页数据的基本流程为：</p> 
+  <ol> 
+   <li>判断页面是否滑动到底部，如已滑动到底部，则调用加载页面的方法，并把<code>currentPage</code>在原基础上加1，并需要判断当前页码是否大于总页数，如大于，则不调用加载页面的方法。</li> 
+   <li>使用ajax请求下一页的数据。</li> 
+   <li>解析请求下一页所获得的数据，并截取所有以<code>post</code>类的html代码。注意：并非所有单个文章列表项的class都为post，请按实际情况来。</li> 
+   <li>追加到当前页面的文章列表中。</li> 
+  </ol> 
+ </body>
+</html>
+    </article>
+</section>
+<section id="changePost" class="mb-5">
+    <div class="d-flex px-1 flex-md-row flex-column">
+            <a id="prePost" class="mr-auto font-weight-bold" href="/archives/docker-compose-run-halo">
+                <span class="icon mr-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-left"></i>
+                </span>
+                <span class="icon mr-2 d-md-none d-inline">
+                    上一篇：
+                </span>
+                Docker Compose 部署Halo教程
+            </a>
+            <a id="nextPost" class="font-weight-bold mt-md-0 mt-3" href="/archives/halo-docker">
+                <span class="icon mr-2 d-md-none d-inline">
+                    下一篇：
+                </span>
+                Halo博客系统-Docker版
+                <span class="icon ml-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
+            </a>
+    </div>
+</section>
+<div class="social-share-cs mb-5"></div>
+
+<section id="comment" class="mb-5">
+        <div>
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="http://localhost:8090/halo-comment.min.js?version=1.1.2"></script>
+        <halo-comment id="25" type="post"/>
+        </div>
+</section>            </div>
+            <div id="right" class="col-lg-4">
+        <section id="tags" class="mb-lg-4 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tags mr-2"></i>相关标签
+                </div>
+                <div class="card-body">
+                        <div class="tag">
+                            <a href="/tags/halo" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>Halo
+                                </span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/javascript" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>JavaScript
+                                </span>
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+            <section id="recommend" class="mb-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list-ul mr-2"></i>相关推荐</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                                    <a href="/archives/sql-99-biao"
+                                       class="list-group-item list-group-item-action">SQL变量和循环用法的体现-打印九九乘法表
+                                    </a>
+                                    <a href="/archives/halo-add-html-page"
+                                       class="list-group-item list-group-item-action">Halo-自助添加HTML静态页面
+                                    </a>
+                                    <a href="/archives/halo-star-100"
+                                       class="list-group-item list-group-item-action">Halo-Star过百
+                                    </a>
+                                    <a href="/archives/maven-use"
+                                       class="list-group-item list-group-item-action">Maven 使用笔记
+                                    </a>
+                                    <a href="/archives/halo-is-coming"
+                                       class="list-group-item list-group-item-action">Halo is coming。
+                                    </a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+<section id="catalogBox" class="d-none">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-book mr-2"></i>文章目录
+        </div>
+        <div id="catalogs" class="card-body p-0 pl-3">
+        </div>
+    </div>
+</section>            </div>
+        </div>
+    </div>
+
+        <div id="catalogButton" class="d-lg-none d-none">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
+        <div id="catalogOverBox" class="d-lg-none"></div>
+
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+        <script>
+            var displayReadProgress = true;
+            var displayLineNumber = true;
+            var enableCodeCopy = true;
+            var displayCodeType = true;
+            var displayMobileCatalog = true;
+            var linkOnBlackPage = true;
+            var enableShare = true;
+            var twitterAccountShare = ``;
+            var postTitle = `无刷新加载下一页方案解析`;
+            var blogTitle = `Ryan Wang's Blog`;
+            var blogUrl = ``;
+        </script>
+        <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="/codelunatic_simple/source/js/post.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>

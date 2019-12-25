@@ -1,0 +1,369 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords"
+                  content="IFTTT "/>
+        <meta name="description" content="玩玩 IFTTT"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/github-markdown.css">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/post.css">
+            <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/github.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>玩玩 IFTTT | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+
+        <div id="readProgress">
+            <div class="read-progress-bar" role="progressbar" style="width: 0"></div>
+        </div>
+
+    <div class="container px-lg-2 pb-3 bg-white">
+<section id="breadcrumb">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class="breadcrumb bg-transparent pl-lg-1 pl-2">
+            <li class="breadcrumb-item">
+                <a href="" class="text-dark font-weight-bold">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+            </li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/others"
+                       class="text-dark font-weight-bold">其他</a>
+                </li>
+            <li class="breadcrumb-item active" aria-current="page">玩玩 IFTTT</li>
+        </ol>
+    </nav>
+</section>
+        <div class="row">
+            <div id="left" class="col-lg-8 pr-xl-5 px-lg-3 px-4">
+<section id="content" class="mb-5">
+    <h1 id="contentTitle">玩玩 IFTTT</h1>
+    <small class="d-inline-block text-muted mt-2 ml-1">
+        <span class="mr-3">
+            <i class="fas fa-user mr-2"></i>Ryan Wang
+        </span>
+        <span class="mr-3">
+            <i class="far fa-calendar mr-2"></i>2019年10月12日
+        </span>
+        <span>
+            <i class="fas fa-eye mr-2"></i>939次浏览
+        </span>
+    </small>
+    <article class="markdown-body mt-4">
+        <html>
+ <head></head>
+ <body>
+  <blockquote> 
+   <p>很早就听说过 IFTTT 这个神器了，但是迟迟没有上手。这次趁有空闲时间，简单把玩了一下，发现确实可以带来一些便利。</p> 
+  </blockquote> 
+  <h2 id="什么是-ifttt">什么是 IFTTT</h2> 
+  <p><a href="https://ifttt.com">IFTTT</a>，是一个新生的网络服务平台，通过其他不同平台的条件来决定是否执行下一条命令。即对网络服务通过其他网络服务作出反应。IFTTT 得名为其口号“if this then that”。</p> 
+  <p>IFTTT的官方念法类似英语单词“gift”的“ift”，即不要发“g”的音。(摘自维基百科)</p> 
+  <h2 id="实现原理">实现原理</h2> 
+  <p>IFTTT 基于任务的条件触发，类似编程语言，即：“若 XXX 进行 YYY 行为，执行 ZZZ。”。每一个可以触发或者作为任务的网站叫做一个 Channel，触发的条件叫做 Triggers，之后执行的任务叫做 Actions，综合上面的一套流程叫做 Task。(摘自维基百科)</p> 
+  <h2 id="几个小案例">几个小案例</h2> 
+  <blockquote> 
+   <p>下面几个我使用的小案例，包括自动分享博文到微博或 Twitter 等社交平台，还有推送 <a href="https://halo.run">Halo</a> 新版本到 Telegram 或者 Twitter 等等。（注册 IFTTT之类的就不多说了，网址是：<a href="https://ifttt.com">https://ifttt.com</a>）</p> 
+  </blockquote> 
+  <h3 id="1-自动分享新博文到各种社交平台">1. 自动分享新博文到各种社交平台。</h3> 
+  <blockquote> 
+   <p>其原理是获取博客的 RSS 地址定时更新，如果有新的博文，就会触发推送到各个社交平台的事件。</p> 
+  </blockquote> 
+  <p>点击右上角头像，选择 <code>Create</code>。就会出现新建一组流程的界面，如下图： <img src="https://cdn.ryanc.cc/img/blog/thumbnails/0f2fc90d672238ef5130606203565a10.png" alt="image.png"></p> 
+  <p>点击 <code>This</code>，会出现很多 <code>service</code>。 <img src="https://cdn.ryanc.cc/img/blog/thumbnails/110faa7dd55535a2f4c59d4c83ff6fd5.png" alt="image.png"></p> 
+  <p>各个 <code>service</code> 当中会有一些可供选择的事件。这里我们找到 <code>RSS Feed</code>。 <img src="https://cdn.ryanc.cc/img/blog/thumbnails/0589a8402fe7f18f85bc4f17224ad1c3.png" alt="image.png"></p> 
+  <p>然后点击这个大大的 RSS 图标，会出现一些我们可以选择的事件，如下图。</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/f5d89f2842a51c665e2a506a5f9b8ff6.png" alt="image.png"></p> 
+  <p>可以看到，这里有两个事件可供我们选择，第一个是，一有新的更新就会执行下一个操作，也就是执行 <code>That</code> 中的事件。第二个是，当新的更新匹配到自定的关键字才会触发下一个操作。这里我们选择第一个即可。</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/0761b6f1d276a5bd89af5e217d0a392d.png" alt="image.png"></p> 
+  <p>这里我们需要输入我们博客的 RSS 地址，如：<a href="https://ryanc.cc/atom.xml">https://ryanc.cc/atom.xml</a>。然后点击创建 <code>Create trigger（触发器）</code> 即可。</p> 
+  <p>然后就会回到下面这个界面，可以看到 This 前面有个 RSS 的图标，这就说明触发器以及创建好了，下面就需要选择触发之后的事件了。 <img src="https://cdn.ryanc.cc/img/blog/thumbnails/9d806a69b777de498222791b80e6d788.png" alt="image.png"></p> 
+  <p>下面以 Twitter 为例，也就是当博文有更新时，自动推送到自己的 Twitter 账户，发表新的动态。第一次使用 Twitter 这个 <code>service</code> 的时候，需要登录你的 Twitter 账户。 <img src="https://cdn.ryanc.cc/img/blog/thumbnails/75e29aff9c6a5322a517fc741c045321.png" alt="image.png"></p> 
+  <p>选择 Twitter 之后，可以看到四个事件。这里我们选择第一个（发一条新的推）即可。 <img src="https://cdn.ryanc.cc/img/blog/thumbnails/94193007b20827c5799c35be4609b25d.png" alt="image.png"></p> 
+  <p>之后点击 <code>Create action</code> 即可。 <img src="https://cdn.ryanc.cc/img/blog/thumbnails/bade613e644ea5539708dac98d1d8570.png" alt="image.png"></p> 
+  <p>到此这个流程就创建完毕了，接下来就可以用同样的方式创建推送到其他社交平台的流程了。比如微博，Facebook，Ins 之类的。当然，微信朋友圈，QQ 空间之类的就别想了。</p> 
+  <h3 id="2-自动推送-github-项目的新版本信息到各种社交平台">2. 自动推送 Github 项目的新版本信息到各种社交平台</h3> 
+  <blockquote> 
+   <p>突然发现这个和上面那个案例是一毛一样的...那就不详细赘述了。</p> 
+  </blockquote> 
+  <p>这里可能会问，博客有 RSS 功能，那么 Github 怎么办？其实 Github 针对各个项目也提供了 RSS 地址的。比如 Halo：<a href="https://github.com/halo-dev/halo/releases.atom">https://github.com/halo-dev/halo/releases.atom</a>。</p> 
+  <p>如果你想关注其他项目的版本动态，只需要改一下地址即可，例如：</p> 
+  <ul> 
+   <li>Vue.js(<a href="https://github.com/vuejs/vue/releases.atom">https://github.com/halo-dev/halo/releases.atom</a>)</li> 
+   <li>SpringBoot(<a href="https://github.com/spring-projects/spring-boot/releases.atom">https://github.com/spring-projects/spring-boot/releases.atom</a>)</li> 
+  </ul> 
+  <p>我使用这个主要是方便推送 Halo 的更新信息，可以自动推送到 Twitter，以及 Halo 的 <a href="https://t.me/halo_dev">Telegram Channel</a>。</p> 
+  <h2 id="最后">最后</h2> 
+  <p>玩一圈下来发现，在国内能玩儿的其实就那么几个，当然如果你在用很多国外的应用，这个服务还是挺方便的。当然，IFTTT 可以做的远不止此，还有诸如 <code>Evernote</code>，<code>Github</code>，<code>Google Drive</code>，<code>YouTube</code>，<code>WordPress</code> 等的 <code>service</code>，还有很多玩法需要去探索啦。</p> 
+ </body>
+</html>
+    </article>
+</section>
+<section id="changePost" class="mb-5">
+    <div class="d-flex px-1 flex-md-row flex-column">
+            <a id="prePost" class="mr-auto font-weight-bold" href="/archives/deploy-gridea-with-caddy">
+                <span class="icon mr-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-left"></i>
+                </span>
+                <span class="icon mr-2 d-md-none d-inline">
+                    上一篇：
+                </span>
+                使用 Caddy 自动部署 Gridea 博客
+            </a>
+            <a id="nextPost" class="font-weight-bold mt-md-0 mt-3" href="/archives/china-mobile-you-are-so-bad">
+                <span class="icon mr-2 d-md-none d-inline">
+                    下一篇：
+                </span>
+                中国移动，你太坏了。
+                <span class="icon ml-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
+            </a>
+    </div>
+</section>
+<div class="social-share-cs mb-5"></div>
+
+<section id="comment" class="mb-5">
+        <div>
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="http://localhost:8090/halo-comment.min.js?version=1.1.2"></script>
+        <halo-comment id="252" type="post"/>
+        </div>
+</section>            </div>
+            <div id="right" class="col-lg-4">
+        <section id="tags" class="mb-lg-4 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tags mr-2"></i>相关标签
+                </div>
+                <div class="card-body">
+                        <div class="tag">
+                            <a href="/tags/ifttt" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>IFTTT 
+                                </span>
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+            <section id="recommend" class="mb-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list-ul mr-2"></i>相关推荐</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                                    <a href="/archives/how-to-get-help"
+                                       class="list-group-item list-group-item-action">如何请教别人
+                                    </a>
+                                    <a href="/archives/future-me"
+                                       class="list-group-item list-group-item-action">给未来的自己写封信-FutureMe.org
+                                    </a>
+                                    <a href="/archives/try-ifttt"
+                                       class="list-group-item list-group-item-action">玩玩 IFTTT
+                                    </a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+<section id="catalogBox" class="d-none">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-book mr-2"></i>文章目录
+        </div>
+        <div id="catalogs" class="card-body p-0 pl-3">
+        </div>
+    </div>
+</section>            </div>
+        </div>
+    </div>
+
+        <div id="catalogButton" class="d-lg-none d-none">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
+        <div id="catalogOverBox" class="d-lg-none"></div>
+
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+        <script>
+            var displayReadProgress = true;
+            var displayLineNumber = true;
+            var enableCodeCopy = true;
+            var displayCodeType = true;
+            var displayMobileCatalog = true;
+            var linkOnBlackPage = true;
+            var enableShare = true;
+            var twitterAccountShare = ``;
+            var postTitle = `玩玩 IFTTT`;
+            var blogTitle = `Ryan Wang's Blog`;
+            var blogUrl = ``;
+        </script>
+        <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="/codelunatic_simple/source/js/post.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>

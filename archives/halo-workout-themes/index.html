@@ -1,0 +1,592 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords"
+                  content="Halo,Java,SpringBoot"/>
+        <meta name="description" content="Halo-博客主题系统的实现"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/github-markdown.css">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/post.css">
+            <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/github.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>Halo-博客主题系统的实现 | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+
+        <div id="readProgress">
+            <div class="read-progress-bar" role="progressbar" style="width: 0"></div>
+        </div>
+
+    <div class="container px-lg-2 pb-3 bg-white">
+<section id="breadcrumb">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class="breadcrumb bg-transparent pl-lg-1 pl-2">
+            <li class="breadcrumb-item">
+                <a href="" class="text-dark font-weight-bold">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+            </li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/study-notes"
+                       class="text-dark font-weight-bold">学习笔记</a>
+                </li>
+            <li class="breadcrumb-item active" aria-current="page">Halo-博客主题系统的实现</li>
+        </ol>
+    </nav>
+</section>
+        <div class="row">
+            <div id="left" class="col-lg-8 pr-xl-5 px-lg-3 px-4">
+<section id="content" class="mb-5">
+    <h1 id="contentTitle">Halo-博客主题系统的实现</h1>
+    <small class="d-inline-block text-muted mt-2 ml-1">
+        <span class="mr-3">
+            <i class="fas fa-user mr-2"></i>Ryan Wang
+        </span>
+        <span class="mr-3">
+            <i class="far fa-calendar mr-2"></i>2018年04月28日
+        </span>
+        <span>
+            <i class="fas fa-eye mr-2"></i>3,607次浏览
+        </span>
+    </small>
+    <article class="markdown-body mt-4">
+        <html>
+ <head></head>
+ <body>
+  <blockquote> 
+   <p>作为一个博客系统，更换主题的功能几乎是必不可少的。该功能的实现参考了<a href="https://github.com/otale/tale">tale</a>开源项目，非常感谢！</p> 
+  </blockquote> 
+  <h2 id="具体实现">具体实现</h2> 
+  <h3 id="项目结构">项目结构</h3> 
+  <pre><code class="language-bash">├── java
+│&nbsp;&nbsp; └── cc
+│&nbsp;&nbsp;     └── ryanc
+│&nbsp;&nbsp;         └── halo
+│&nbsp;&nbsp;             ├── Application.java
+│&nbsp;&nbsp;             ├── model
+│&nbsp;&nbsp;             ├── repository
+│&nbsp;&nbsp;             ├── service
+│&nbsp;&nbsp;             ├── util
+│&nbsp;&nbsp;             └── web
+│&nbsp;&nbsp;                 ├── controller   //控制器
+│&nbsp;&nbsp;                 └── interceptor  //拦截器
+└── resources
+    ├── static
+    └── templates					//模板目录
+        └── themes					//主题目录
+            ├── anatole
+            ├── halo
+            └── material
+</code></pre> 
+  <h3 id="更换主题">更换主题</h3> 
+  <p>由于使用了freemarker模板引擎，换主题这个功能就变得非常简单了，在Controller里面渲染页面的时候，只需要修改主题存在路径就可以了，具体实现方式如下：</p> 
+  <p>BaseController：</p> 
+  <pre><code class="language-java">public abstract class BaseController {
+
+    /**
+     * 定义默认主题
+     */
+    public static String THEME = "halo";
+    /**
+     * 根据主题名称渲染页面
+     *
+     * @param pageName pageName
+     * @return 返回拼接好的模板路径
+     */
+    public String render(String pageName){
+        StringBuffer themeStr = new StringBuffer("themes/");
+        themeStr.append(THEME);
+        themeStr.append("/");
+        return themeStr.append(pageName).toString();
+    }
+}
+</code></pre> 
+  <p>IndexController（页面控制器），继承BaseController：</p> 
+  <pre><code class="language-Java">@GetMapping(value = "page/{page}")
+public String index(Model model,
+                    @PathVariable(value = "page") Integer page){
+    Sort sort = new Sort(Sort.Direction.DESC,"postDate");
+    //默认显示10条
+    Integer size = 10;
+    //所有文章数据，分页
+    Pageable pageable = new PageRequest(page-1,size,sort);
+    Page&lt;Post&gt; posts = postService.findPostByStatus(0,pageable);
+    model.addAttribute("posts",posts);
+    return this.render("index");
+}
+</code></pre> 
+  <p>仔细看上面所示代码可知，在BaseController里面定义了一个静态变量作为主题名称(和主题文件夹名一致)，然后在rander方法里面拼接好主题完整路径返回即可，如<code>/themes/halo</code>，需要注意的是：render方法是有一个参数的，这个参数就是freemarker的模板文件名称，完整拼接如：<code>/themes/halo/index</code>，然后在IndexController的方法里面就可以调用该方法，并传入响应的模板文件名，就可以完成渲染了。</p> 
+  <p>如果需要切换主题，那么只需要在后台管理对BaseController里面的THEME变量重新赋值便可以实现切换主题了。</p> 
+  <h3 id="主题管理界面">主题管理界面</h3> 
+  <p>上面说到了在后台管理对BaseController里面的THEME变量重新赋值，那么既然要切换主题，那就得把所有主题展示出来吧！实现的方法也不是太难，只需要扫描theme文件夹下的所有目录就行了。</p> 
+  <p>具体代码：</p> 
+  <p>Theme实体类：</p> 
+  <pre><code class="language-java">public class Theme implements Serializable {
+    /**
+     * 主题名称
+     */
+    private String themeName;
+
+    /**
+     * 是否支持设置
+     */
+    private boolean hasOptions;
+}
+</code></pre> 
+  <p>本来是不需要创建这个实体类的，但考虑到要确定该主题是否支持设置，所有建一个实体类来传输数据会比较方便。</p> 
+  <p>HaloUtil（工具类）：</p> 
+  <pre><code class="language-java">/**
+ * 获取所有主题
+ * @return list
+ */
+public static List&lt;Theme&gt; getThemes(){
+    List&lt;Theme&gt; themes = new ArrayList&lt;&gt;();
+    try {
+        //获取项目根路径
+        File basePath = new File(ResourceUtils.getURL("classpath:").getPath());
+        //获取主题路径
+        File themesPath = new File(basePath.getAbsolutePath(),"templates/themes");
+        File[] files = themesPath.listFiles();
+        if(null!=files) {
+            Theme theme = null;
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    theme = new Theme();
+                    theme.setThemeName(file.getName());
+                    File optionsPath = new File(themesPath.getAbsolutePath(), file.getName() + "/module/options.ftl");
+                    //判断是否存在options.ftl模板
+                    if (optionsPath.exists()) {
+                        theme.setHasOptions(true);
+                    } else {
+                        theme.setHasOptions(false);
+                    }
+                    themes.add(theme);
+                }
+            }
+        }
+    }catch (Exception e){
+        log.error("主题获取失败："+e.getMessage());
+    }
+    return themes;
+}
+</code></pre> 
+  <p>这里返回的themes就是所有主题的List集合了。</p> 
+  <p>ThemeController：</p> 
+  <pre><code class="language-java">/**
+ * 渲染主题设置页面
+ *
+ * @return String
+ */
+@GetMapping
+public String themes(Model model){
+    model.addAttribute("activeTheme",BaseController.THEME);
+    if(null!=HaloConst.THEMES){
+        model.addAttribute("themes",HaloUtil.getThemes());
+    }
+    return "admin/admin_theme";
+}
+</code></pre> 
+  <p>页面上：</p> 
+  <pre><code class="language-html">&lt;#list themes as theme&gt;
+    &lt;div class="col-md-3"&gt;
+        &lt;div class="box box-solid"&gt;
+            &lt;div class="box-body theme-thumbnail" style="background-image: url(/${theme.themeName?if_exists}/screenshot.png)"&gt;&lt;/div&gt;
+            &lt;div class="box-footer"&gt;
+                &lt;span class="theme-title"&gt;${theme.themeName?if_exists?upper_case}&lt;/span&gt;
+                &lt;#if theme.hasOptions==true&gt;
+                    &lt;button class="btn btn-primary btn-sm pull-right btn-flat" onclick="openSetting('${theme.themeName?if_exists}')"&gt;设置&lt;/button&gt;
+                &lt;/#if&gt;
+                &lt;#if activeTheme == "${theme.themeName}"&gt;
+                    &lt;button class="btn btn-primary btn-sm pull-right btn-flat" disabled&gt;已启用&lt;/button&gt;
+                &lt;#else&gt;
+                    &lt;button onclick="setTheme('${theme.themeName?if_exists}')" class="btn btn-primary btn-sm pull-right btn-flat"&gt;启用&lt;/button&gt;
+                &lt;/#if&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/#list&gt;
+</code></pre> 
+  <p>效果：</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/halo-workout-themes/halo-theme-1.png" alt=""></p> 
+  <h3 id="后台上传主题">后台上传主题</h3> 
+  <p>这个功能可以实现，在后台管理可以上传主题压缩包并解压到themes目录，实现起来也不是太难，实现代码如下：</p> 
+  <p>ThemeController：</p> 
+  <pre><code class="language-java">@RequestMapping(value = "/upload", method = RequestMethod.POST)
+@ResponseBody
+public boolean uploadTheme(@RequestParam("file") MultipartFile file,
+                           HttpServletRequest request){
+    try {
+        if(!file.isEmpty()) {
+            //获取项目根路径
+            File basePath = new File(ResourceUtils.getURL("classpath:").getPath());
+            File themePath = new File(basePath.getAbsolutePath(), new StringBuffer("templates/themes/").append(file.getOriginalFilename()).toString());
+            file.transferTo(themePath);
+            log.info("上传主题成功，路径：" + themePath.getAbsolutePath());
+            logsService.saveByLogs(
+                new Logs(LogsRecord.UPLOAD_THEME,file.getOriginalFilename(),HaloUtil.getIpAddr(request),HaloUtil.getDate())
+            );
+            //调用方法解压该压缩包到themes目录
+            HaloUtil.unZip(themePath.getAbsolutePath(),new File(basePath.getAbsolutePath(),"templates/themes/").getAbsolutePath());
+            //移除压缩包
+            HaloUtil.removeFile(themePath.getAbsolutePath());
+            HaloConst.THEMES.clear();
+            HaloConst.THEMES = HaloUtil.getThemes();
+            return true;
+        }else{
+            log.error("上传失败，没有选择文件");
+        }
+    }catch (Exception e){
+        log.error("上传失败："+e.getMessage());
+    }
+    return false;
+}
+</code></pre> 
+  <p>unZip：</p> 
+  <pre><code class="language-java">public static void unZip(String zipFilePath,String descDir){
+    File zipFile=new File(zipFilePath);
+    File pathFile=new File(descDir);
+    if(!pathFile.exists()){
+        pathFile.mkdirs();
+    }
+    ZipFile zip=null;
+    InputStream in=null;
+    OutputStream out=null;
+    try {
+        zip=new ZipFile(zipFile);
+        Enumeration&lt;?&gt; entries=zip.entries();
+        while(entries.hasMoreElements()){
+            ZipEntry entry=(ZipEntry) entries.nextElement();
+            String zipEntryName=entry.getName();
+            in=zip.getInputStream(entry);
+
+            String outPath=(descDir+"/"+zipEntryName).replace("\\*", "/");
+            File file=new File(outPath.substring(0, outPath.lastIndexOf('/')));
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            if(new File(outPath).isDirectory()){
+                continue;
+            }
+            out=new FileOutputStream(outPath);
+            byte[] buf=new byte[4*1024];
+            int len;
+            while((len=in.read(buf))&gt;=0){
+                out.write(buf, 0, len);
+            }
+            in.close();
+        }
+    } catch (Exception e) {
+        log.error("解压失败："+e.getMessage());
+    }finally{
+        try {
+            if(zip!=null)
+                zip.close();
+            if(in!=null)
+                in.close();
+            if(out!=null)
+                out.close();
+        } catch (IOException e) {
+            log.error("未知错误："+e.getMessage());
+        }
+    }
+}
+</code></pre> 
+  <h3 id="主题的设置">主题的设置</h3> 
+  <p>在整个主题系统中，在某些情况下是需要对主题进行单独设置的。比如社交选项，样式选项等，其实要存储这些设置是非常简单的，和上一篇文章其实是一样的，将各个设置选项和值以key，value的方式存储在数据表中就可以了，在这里就不多讲了。</p> 
+  <p>效果图：</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/halo-workout-themes/halo-theme-2.png" alt=""></p> 
+  <p>注：这个弹出层是使用的layer实现的，非常感谢该框架！</p> 
+  <h2 id="总结">总结</h2> 
+  <p>整个主题系统的完善还是花了不少时间的，这里只是讲了核心的实现方法，如果有朋友对此感兴趣的话，可以去github上看具体实现的代码：<a href="https://github.com/ruibaby/halo">https://github.com/ruibaby/halo</a>。如果对你有帮助的话，请给个Star，也欢迎大家提pull request。</p> 
+ </body>
+</html>
+    </article>
+</section>
+<section id="changePost" class="mb-5">
+    <div class="d-flex px-1 flex-md-row flex-column">
+            <a id="prePost" class="mr-auto font-weight-bold" href="/archives/halo-star-100">
+                <span class="icon mr-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-left"></i>
+                </span>
+                <span class="icon mr-2 d-md-none d-inline">
+                    上一篇：
+                </span>
+                Halo-Star过百
+            </a>
+            <a id="nextPost" class="font-weight-bold mt-md-0 mt-3" href="/archives/halo-workout-options">
+                <span class="icon mr-2 d-md-none d-inline">
+                    下一篇：
+                </span>
+                Halo-博客设置存储的实现
+                <span class="icon ml-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
+            </a>
+    </div>
+</section>
+<div class="social-share-cs mb-5"></div>
+
+<section id="comment" class="mb-5">
+        <div>
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="http://localhost:8090/halo-comment.min.js?version=1.1.2"></script>
+        <halo-comment id="26" type="post"/>
+        </div>
+</section>            </div>
+            <div id="right" class="col-lg-4">
+        <section id="tags" class="mb-lg-4 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tags mr-2"></i>相关标签
+                </div>
+                <div class="card-body">
+                        <div class="tag">
+                            <a href="/tags/halo" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>Halo
+                                </span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/java" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>Java
+                                </span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/springboot" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>SpringBoot
+                                </span>
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+            <section id="recommend" class="mb-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list-ul mr-2"></i>相关推荐</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                                    <a href="/archives/sql-99-biao"
+                                       class="list-group-item list-group-item-action">SQL变量和循环用法的体现-打印九九乘法表
+                                    </a>
+                                    <a href="/archives/halo-add-html-page"
+                                       class="list-group-item list-group-item-action">Halo-自助添加HTML静态页面
+                                    </a>
+                                    <a href="/archives/halo-star-100"
+                                       class="list-group-item list-group-item-action">Halo-Star过百
+                                    </a>
+                                    <a href="/archives/maven-use"
+                                       class="list-group-item list-group-item-action">Maven 使用笔记
+                                    </a>
+                                    <a href="/archives/halo-is-coming"
+                                       class="list-group-item list-group-item-action">Halo is coming。
+                                    </a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+<section id="catalogBox" class="d-none">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-book mr-2"></i>文章目录
+        </div>
+        <div id="catalogs" class="card-body p-0 pl-3">
+        </div>
+    </div>
+</section>            </div>
+        </div>
+    </div>
+
+        <div id="catalogButton" class="d-lg-none d-none">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
+        <div id="catalogOverBox" class="d-lg-none"></div>
+
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+        <script>
+            var displayReadProgress = true;
+            var displayLineNumber = true;
+            var enableCodeCopy = true;
+            var displayCodeType = true;
+            var displayMobileCatalog = true;
+            var linkOnBlackPage = true;
+            var enableShare = true;
+            var twitterAccountShare = ``;
+            var postTitle = `Halo-博客主题系统的实现`;
+            var blogTitle = `Ryan Wang's Blog`;
+            var blogUrl = ``;
+        </script>
+        <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="/codelunatic_simple/source/js/post.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>

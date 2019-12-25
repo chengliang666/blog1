@@ -1,0 +1,415 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords"
+                  content="Java,maven,水文"/>
+        <meta name="description" content="Maven 使用笔记"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/github-markdown.css">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/post.css">
+            <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/github.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>Maven 使用笔记 | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+
+        <div id="readProgress">
+            <div class="read-progress-bar" role="progressbar" style="width: 0"></div>
+        </div>
+
+    <div class="container px-lg-2 pb-3 bg-white">
+<section id="breadcrumb">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class="breadcrumb bg-transparent pl-lg-1 pl-2">
+            <li class="breadcrumb-item">
+                <a href="" class="text-dark font-weight-bold">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+            </li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/study-notes"
+                       class="text-dark font-weight-bold">学习笔记</a>
+                </li>
+            <li class="breadcrumb-item active" aria-current="page">Maven 使用笔记</li>
+        </ol>
+    </nav>
+</section>
+        <div class="row">
+            <div id="left" class="col-lg-8 pr-xl-5 px-lg-3 px-4">
+<section id="content" class="mb-5">
+    <h1 id="contentTitle">Maven 使用笔记</h1>
+    <small class="d-inline-block text-muted mt-2 ml-1">
+        <span class="mr-3">
+            <i class="fas fa-user mr-2"></i>Ryan Wang
+        </span>
+        <span class="mr-3">
+            <i class="far fa-calendar mr-2"></i>2017年09月21日
+        </span>
+        <span>
+            <i class="fas fa-eye mr-2"></i>910次浏览
+        </span>
+    </small>
+    <article class="markdown-body mt-4">
+        <html>
+ <head></head>
+ <body>
+  <blockquote> 
+   <p>前两天做项目的时候，偶然知道了Maven这个工具，据说可以非常方便的管理JAR文件，和生成War包等操作。于是乎，就花了点时间在项目中使用了Maven。下面就简单的记录一下使用心得。</p> 
+  </blockquote> 
+  <h2 id="管理jar包">管理JAR包</h2> 
+  <p>这个功能简直好用到爆......起初做项目的时候，遇到需要使用JAR包的时候，百度各种找......比如在IDEA中是不集成JSTL标签库的，于是乎就得去网上找JAR包，找到了之后，下载也特别麻烦，不是要注册就是要积分，搞得很头疼。但是如果使用Maven的话，我只需要在<code>pom.xml</code>中配置一下就自动下载到Maven本地仓库而且可以直接使用了。如：</p> 
+  <pre><code class="language-xml">&lt;dependency&gt;
+&nbsp;&nbsp;&lt;groupId&gt;jstl&lt;/groupId&gt;
+&nbsp;&nbsp;&lt;artifactId&gt;jstl&lt;/artifactId&gt;
+&nbsp;&nbsp;&lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&nbsp;&nbsp;&lt;groupId&gt;taglibs&lt;/groupId&gt;
+&nbsp;&nbsp;&lt;artifactId&gt;standard&lt;/artifactId&gt;
+&nbsp;&nbsp;&lt;version&gt;1.1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre> 
+  <p>当换电脑继续写项目的时候，也就不用再配置一次了，非常方便。</p> 
+  <p>但是问题来了，当我在学校打开项目继续写的时候，那个下载速度简直比蜗牛还慢......本来学校的网就慢的出奇，Maven的中央仓库又在国外，直接导致下载速度异常的慢。</p> 
+  <p>然后网上查了一下，可以把Maven中央仓库地址改为阿里的Maven仓库地址，只需要在Maven的settings.xml文件里的mirrors节点，添加下面的子节点：</p> 
+  <pre><code class="language-xml">&lt;mirror&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;id&gt;nexus-aliyun&lt;/id&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;name&gt;Nexus aliyun&lt;/name&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;
+&lt;/mirror&gt; 
+</code></pre> 
+  <blockquote> 
+   <p>不得不说，阿里在Java技术方面确实很强大，之前我也了解过阿里的「<a href="https://github.com/alibaba/druid">druid</a>」这个连接池。据说是全世界第一的Java连接池，但是在我使用druid连接池的时候，并没有发现和其他连接池的区别，可能还是我太年轻了吧。在连接池这方面我还得下点功夫深入理解一下，顺便再了解一下高并发。</p> 
+  </blockquote> 
+  <p>在我使用druid连接池的时候，我是这样配置的：</p> 
+  <p>在<code>pom.xml</code>中配置：</p> 
+  <pre><code class="language-xml">&lt;dependency&gt;
+&nbsp;&nbsp;&lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+&nbsp;&nbsp;&lt;artifactId&gt;druid&lt;/artifactId&gt;
+&nbsp;&nbsp;&lt;version&gt;1.1.3&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre> 
+  <p>在resources路径下的<code>druid.properties</code>：</p> 
+  <pre><code class="language-xml">driverClassName=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/examDB?useUnicode=true&amp;characterEncoding=UTF-8
+username=root
+password=123456
+initialSize=1
+minIdle=1
+maxActive=2000
+maxWait=60000
+timeBetweenEvictionRunsMillis=60000
+minEvictableIdleTimeMillis=300000
+validationQuery=SELECT 'x'
+testWhileIdle=true
+testOnBorrow=false
+testOnReturn=true
+poolPreparedStatements=false
+maxPoolPreparedStatementPerConnectionSize=20
+filters=stat
+</code></pre> 
+  <p>然后在数据库连接工具类<code>DBUtil</code>中加载<code>druid.properties</code>：</p> 
+  <pre><code class="language-java">//加载配置文件
+Properties pr = new Properties();
+//获取resources资源路径下的连接池配置文件
+pr.load(this.getClass().getResourceAsStream("/druid.properties"));
+DataSource dataSource = DruidDataSourceFactory.createDataSource(pr);
+</code></pre> 
+  <h2 id="生成war包">生成war包</h2> 
+  <p>这个功能暂时还没怎么使用过，但也还是简单测试了一下。使用方法很简单，只需要在控制台输入<code>mvn clean package</code>或者直接在IDEA的Maven Projects中选择package就行了，接着在target就可以找到生成好的war包了。</p> 
+  <p>我尝试上传到服务器上去，然后打开tomcat服务器就可以访问了。非常方便，但我还是觉得IDEA自动部署到远程服务器的功能更好用。</p> 
+  <h2 id="结尾">结尾</h2> 
+  <p>对于这样的工具简直是相见恨晚呐，不过目前对Maven的使用还不是特别溜，所以在以后的项目中就一直使用Maven构建和管理JAR包了。</p> 
+ </body>
+</html>
+    </article>
+</section>
+<section id="changePost" class="mb-5">
+    <div class="d-flex px-1 flex-md-row flex-column">
+            <a id="prePost" class="mr-auto font-weight-bold" href="/archives/springboot-study-1">
+                <span class="icon mr-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-left"></i>
+                </span>
+                <span class="icon mr-2 d-md-none d-inline">
+                    上一篇：
+                </span>
+                Spring Boot 学习笔记（一）
+            </a>
+            <a id="nextPost" class="font-weight-bold mt-md-0 mt-3" href="/archives/sql-99-biao">
+                <span class="icon mr-2 d-md-none d-inline">
+                    下一篇：
+                </span>
+                SQL变量和循环用法的体现-打印九九乘法表
+                <span class="icon ml-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
+            </a>
+    </div>
+</section>
+<div class="social-share-cs mb-5"></div>
+
+<section id="comment" class="mb-5">
+        <div>
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="http://localhost:8090/halo-comment.min.js?version=1.1.2"></script>
+        <halo-comment id="15" type="post"/>
+        </div>
+</section>            </div>
+            <div id="right" class="col-lg-4">
+        <section id="tags" class="mb-lg-4 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tags mr-2"></i>相关标签
+                </div>
+                <div class="card-body">
+                        <div class="tag">
+                            <a href="/tags/java" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>Java
+                                </span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/maven" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>maven
+                                </span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/diving" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>水文
+                                </span>
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+            <section id="recommend" class="mb-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list-ul mr-2"></i>相关推荐</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                                    <a href="/archives/sql-99-biao"
+                                       class="list-group-item list-group-item-action">SQL变量和循环用法的体现-打印九九乘法表
+                                    </a>
+                                    <a href="/archives/halo-add-html-page"
+                                       class="list-group-item list-group-item-action">Halo-自助添加HTML静态页面
+                                    </a>
+                                    <a href="/archives/halo-star-100"
+                                       class="list-group-item list-group-item-action">Halo-Star过百
+                                    </a>
+                                    <a href="/archives/maven-use"
+                                       class="list-group-item list-group-item-action">Maven 使用笔记
+                                    </a>
+                                    <a href="/archives/halo-is-coming"
+                                       class="list-group-item list-group-item-action">Halo is coming。
+                                    </a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+<section id="catalogBox" class="d-none">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-book mr-2"></i>文章目录
+        </div>
+        <div id="catalogs" class="card-body p-0 pl-3">
+        </div>
+    </div>
+</section>            </div>
+        </div>
+    </div>
+
+        <div id="catalogButton" class="d-lg-none d-none">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
+        <div id="catalogOverBox" class="d-lg-none"></div>
+
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+        <script>
+            var displayReadProgress = true;
+            var displayLineNumber = true;
+            var enableCodeCopy = true;
+            var displayCodeType = true;
+            var displayMobileCatalog = true;
+            var linkOnBlackPage = true;
+            var enableShare = true;
+            var twitterAccountShare = ``;
+            var postTitle = `Maven 使用笔记`;
+            var blogTitle = `Ryan Wang's Blog`;
+            var blogUrl = ``;
+        </script>
+        <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="/codelunatic_simple/source/js/post.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>

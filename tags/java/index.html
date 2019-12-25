@@ -1,0 +1,716 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords" content="ryan0up,halo博客,halo,java,ruibaby,ryanwang"/>
+        <meta name="description" content="Ryan Wang 的博客。"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/index.css">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>Java | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+    <div class="container px-lg-2 pb-3 bg-white">
+        <div class="row mb-3">
+            <div id="left" class="col-xl-8 pr-xl-5 pt-3">
+    <div class="alert alert-secondary mt-4 mb-2" role="alert">
+        <i class="fa fa-location-arrow mr-2" aria-hidden="true"></i>
+        当前位于"Java"标签下
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/spring-data-jpa-and-or" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                Spring Data JPA 之 And 与 Or 的坑
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">最近写Halo的搜索功能的时候，发现一个JPA的坑，网上查了很多资料才解决，遂水文记录一下。缘由Halo的搜索功能需要根据关键字来索引文章的标题以及内容，于是乎，按照JPA的命名规定，我在Repository下写了这个方法：Page&lt;Post&gt;findByPostTitleLikeOrP</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                        <a class="text-body mr-1"
+                           href="/tags/springboot">SpringBoot</a>
+                        <a class="text-body mr-1"
+                           href="/tags/sql">sql</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2019年01月12日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>4,543次浏览
+            </span>
+        </small>
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/docker-env" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                Docker 环境变量的运用
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">前段时间发布了Halo的DockerCompose部署教程，该方法可以自动完成Nginx配置以及SSL证书的配置，实现了Halo最便捷的部署方式，可最近确发现了一个问题，就是部署的时候不太方便修改内置数据库的用户名和密码，使用的是默认的admin和123456，当初考虑到安全问题，就禁用了h2数据库</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                        <a class="text-body mr-1"
+                           href="/tags/springboot">SpringBoot</a>
+                        <a class="text-body mr-1"
+                           href="/tags/docker">Docker</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2018年12月29日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>3,608次浏览
+            </span>
+        </small>
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/docker-compose-run-halo" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                Docker Compose 部署Halo教程
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">上一篇文章讲到了使用Docker运行Halo，但是仅仅只是运行起来了Halo，并没有讲到如何使用Nginx进行反向代理以绑定域名，也没有讲到如何配置HTTPS，所以这篇文章将向大家演示一下如何使用DockerCompose部署Halo，并自动配置Nginx以及SSL证书。整个过程最慢不超过10分钟。</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/halo">Halo</a>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                        <a class="text-body mr-1"
+                           href="/tags/docker">Docker</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2018年12月08日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>3,622次浏览
+            </span>
+        </small>
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/halo-docker" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                Halo博客系统-Docker版
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">好消息，Halo现已加入Docker自动构建套餐。鉴于之前有很多对Java不是很熟悉的人想要部署Halo而又问题重重，于是乎，在多次调教下，Halo现在已经自动在DockerHub构建了。废话少说，先上图使用方法安装Docker安装Docker有很多方式，按照你系统环境来安装吧，具体教程请看：Doc</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/halo">Halo</a>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                        <a class="text-body mr-1"
+                           href="/tags/springboot">SpringBoot</a>
+                        <a class="text-body mr-1"
+                           href="/tags/docker">Docker</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2018年10月18日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>5,864次浏览
+            </span>
+        </small>
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/springboot-package" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                Spring Boot另类的打包方式
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">这一篇是我很久之前发在头条上的，今天转过来。SpringBoot在近来是非常受开发者欢迎的，简化了配置方式，不需要再配置繁琐的xml，内嵌web容器等等。相对于SSM，本人更喜欢使用SpringBoot开发Web项目。总所周知，SpringBoot提供了两种打包方式，即Jar和War。前者内置了we</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                        <a class="text-body mr-1"
+                           href="/tags/springboot">SpringBoot</a>
+                        <a class="text-body mr-1"
+                           href="/tags/maven">maven</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2018年09月25日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>3,334次浏览
+            </span>
+        </small>
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/halo-run-with-git-maven" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                Halo-部署教程
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">11月22号更新安装视频教程环境要求JDK1.8以上。Maven3.x。数据库MySQL5.5以上MariaDB或者直接使用H2Database，免安装。Git再次声明，不需要单独安装Tomcat之类的web容器。需要注意的是：如果使用一键安装脚本（后面会讲到），那么你只需要安装数据库即可（如果使用</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/halo">Halo</a>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                        <a class="text-body mr-1"
+                           href="/tags/springboot">SpringBoot</a>
+                        <a class="text-body mr-1"
+                           href="/tags/maven">maven</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2018年07月23日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>9,127次浏览
+            </span>
+        </small>
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/halo-add-menu" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                Halo-菜单栏添加菜单教程
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">之前有部分人反馈说不知道菜单栏可以添加哪些菜单，而且添加菜单的时候也不可以选择路径（会有的），于是乎只能慢慢探索可以添加的路径，下面就详细罗列一下可以添加的路径。系统预设路径名称路径说明首页/主页路径归档页面/archives文章归档的页面友情链接/links友情链接页面，需要主题自带图库/gall</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/halo">Halo</a>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2018年07月08日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>2,170次浏览
+            </span>
+        </small>
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/hutool-java-tools-lib" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                Hutool-贼好用的Java工具类库
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">Hutool，一个Java的工具集合，是我前几天在码云上闲的时候发现的。发现其功能贼强大，于是乎就测试了一下其中的部分工具，一下子就被这个工具给吸引住了。简介Hutool是Hu+tool的自造词，前者致敬我的“前任公司”，后者为工具之意，谐音“糊涂”，寓意追求“万事都作糊涂观，无所谓失，无所谓得”的</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                        <a class="text-body mr-1"
+                           href="/tags/diving">水文</a>
+                        <a class="text-body mr-1"
+                           href="/tags/hutools">Hutools</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2018年06月20日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>9,722次浏览
+            </span>
+        </small>
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/how-to-use-h2-database" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                H2 Database使用教程
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">Halo是默认使用H2Database的，虽然也支持MySQL，但是个人认为博客系统没必要用MySQL，毕竟只是一个单纯的博客而已。H2不仅不需要单独安装，而且配置极其简单，下面介绍一下Halo配合H2使用的基本操作。配置在安装Halo之前是需要简单配置一下H2的，在resources/applic</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/halo">Halo</a>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                        <a class="text-body mr-1"
+                           href="/tags/sql">sql</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2018年05月17日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>4,195次浏览
+            </span>
+        </small>
+    </div>
+    <div class="list-item px-1 py-4 mt-xl-0 mt-3 border-bottom">
+        <a href="/archives/halo-archive" class="text-body">
+            <h4 class="post-title font-weight-bold text-break">
+                Halo-文章归档的实现
+            </h4>
+        </a>
+        <span class="post-summary mt-4 d-block text-muted text-break">在一个正常的博客系统中，归档页面也是必不可少的，需要将文章以年份或者月份归档起来，让文章依次展示出来。下面将说明Halo是怎么实现文章归档的。实现思路使用一个类来专门存储归档数据，这个类包括的属性有年份，月份，年份与月份对应的文章数量，年份与月份对应的文章。这样一列出来之后，那么问题就好解决多了，只</span>
+
+        <small class="mt-4 d-block">
+                <span class="mr-3 font-weight-bold d-md-inline d-none">
+                    <i class="fas fa-tags mr-1"></i>
+                        <a class="text-body mr-1"
+                           href="/tags/halo">Halo</a>
+                        <a class="text-body mr-1"
+                           href="/tags/java">Java</a>
+                        <a class="text-body mr-1"
+                           href="/tags/springboot">SpringBoot</a>
+                        <a class="text-body mr-1"
+                           href="/tags/sql">sql</a>
+                </span>
+            <span class="mr-3">
+                <i class="fas fa-calendar-alt mr-2"></i>2018年05月12日
+            </span>
+            <span>
+                <i class="fas fa-eye mr-2"></i>1,524次浏览
+            </span>
+        </small>
+    </div>
+        <section id="pagination" class="mt-5 mb-lg-3 d-flex justify-content-center">
+            <nav aria-label="切换上下页">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                            <a class="page-link" href="/tags/java/page/1" tabindex="-1"
+                               aria-disabled="true">&laquo;</a>
+                    </li>
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="javascript:void(0)">1 <span
+                                            class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item">
+                                <a href="/tags/java/page/2"
+                                   class="page-link">2
+                                </a>
+                            </li>
+                    <li class="page-item ">
+                            <a class="page-link"
+                               href="/tags/java/page/2"
+                               aria-label="下一页">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+
+
+            </div>
+            <div id="right" class="col-xl-4 pt-3">
+<section id="profile" class="mt-4 bg-white d-xl-block d-none">
+    <div class="card">
+        <div class="card-header"><i class="fas fa-user mr-2"></i>个人信息</div>
+        <div class="card-body d-flex flex-column align-items-center">
+            <div class="mt-4 mb-4point5 w-100 d-flex justify-content-center">
+                <div class="w-50 text-right mr-3">
+                    <i style="display: inline-block;
+                            width: 6.5rem; height: 6.5rem;
+                            background-image: url('https://cdn.ryanc.cc/img/blog/thumbnails/d233b4c9312f1d4e19b962009a9f2635.gif');
+                            background-size: cover;"
+                       class="rounded-circle"></i>
+                </div>
+                <div class="w-50 text-left ml-3 d-flex flex-column justify-content-center">
+                    <span class="h4 d-block">Ryan Wang</span>
+                        <span class="text-muted text-truncate">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            四川 成都
+                        </span>
+                </div>
+            </div>
+
+            <div class="w-100 border-top"></div>
+
+            <div class="mt-4 mb-3 w-100 d-flex justify-content-around">
+                <div class="w-100 text-center">
+                    <small class="text-muted">文章数量</small>
+                    <span class="d-block h2 mt-2">
+                            35
+                    </span>
+                </div>
+                <div class="w-100 text-center">
+                    <small class="text-muted">分类数量</small>
+                    <span class="d-block h2 mt-2">
+                            4
+                    </span>
+                </div>
+                <div class="w-100 text-center">
+                    <small class="text-muted">标签数量</small>
+                    <span class="d-block h2 mt-2">
+                            29
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>        <section id="tags" class="mt-4 mb-5 bg-white">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tags mr-2"></i>
+                    所有标签
+                </div>
+                <div class="card-body">
+                        <div class="tag">
+                            <a href="/tags/raspberrypi" class="text-muted">
+                                <span class="tag-left">Raspberry Pi</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/nginx" class="text-muted">
+                                <span class="tag-left">Nginx</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/flarum" class="text-muted">
+                                <span class="tag-left">Flarum</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/ios" class="text-muted">
+                                <span class="tag-left">iOS</span>
+                                <span class="tag-right">0</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/caddy" class="text-muted">
+                                <span class="tag-left">Caddy</span>
+                                <span class="tag-right">0</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/ifttt" class="text-muted">
+                                <span class="tag-left">IFTTT </span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/flutter" class="text-muted">
+                                <span class="tag-left">Flutter</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/vue" class="text-muted">
+                                <span class="tag-left">Vue</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/jpress" class="text-muted">
+                                <span class="tag-left">JPress</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/javascript" class="text-muted">
+                                <span class="tag-left">JavaScript</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/docker" class="text-muted">
+                                <span class="tag-left">Docker</span>
+                                <span class="tag-right">4</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/feeling" class="text-muted">
+                                <span class="tag-left">感悟</span>
+                                <span class="tag-right">2</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/life" class="text-muted">
+                                <span class="tag-left">生活</span>
+                                <span class="tag-right">2</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/comment-system" class="text-muted">
+                                <span class="tag-left">评论系统</span>
+                                <span class="tag-right">0</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/html" class="text-muted">
+                                <span class="tag-left">HTML</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/hutools" class="text-muted">
+                                <span class="tag-left">Hutools</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/upyun" class="text-muted">
+                                <span class="tag-left">又拍云</span>
+                                <span class="tag-right">0</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/diving" class="text-muted">
+                                <span class="tag-left">水文</span>
+                                <span class="tag-right">11</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/summary" class="text-muted">
+                                <span class="tag-left">总结</span>
+                                <span class="tag-right">3</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/plan" class="text-muted">
+                                <span class="tag-left">计划</span>
+                                <span class="tag-right">1</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/express" class="text-muted">
+                                <span class="tag-left">表达</span>
+                                <span class="tag-right">2</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/j2ee" class="text-muted">
+                                <span class="tag-left">J2EE</span>
+                                <span class="tag-right">2</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/javaweb" class="text-muted">
+                                <span class="tag-left">JavaWeb</span>
+                                <span class="tag-right">2</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/maven" class="text-muted">
+                                <span class="tag-left">maven</span>
+                                <span class="tag-right">4</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/sql" class="text-muted">
+                                <span class="tag-left">sql</span>
+                                <span class="tag-right">5</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/css" class="text-muted">
+                                <span class="tag-left">css</span>
+                                <span class="tag-right">3</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/springboot" class="text-muted">
+                                <span class="tag-left">SpringBoot</span>
+                                <span class="tag-right">14</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/java" class="text-muted">
+                                <span class="tag-left">Java</span>
+                                <span class="tag-right">21</span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/halo" class="text-muted">
+                                <span class="tag-left">Halo</span>
+                                <span class="tag-right">16</span>
+                            </a>
+                        </div>
+                    <div class="tag">
+                        <a href="/tags" class="text-muted">
+                            <span class="tag-left">所有标签</span>
+                            <span class="tag-right">
+                                35
+                        </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+            </div>
+        </div>
+    </div>
+    <span id="keyword" class="d-none"></span>
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>

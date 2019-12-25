@@ -1,0 +1,405 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords"
+                  content="Halo,Raspberry Pi"/>
+        <meta name="description" content="博客迁移到 Raspberry Pi"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/github-markdown.css">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/post.css">
+            <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/github.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>博客迁移到 Raspberry Pi | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+
+        <div id="readProgress">
+            <div class="read-progress-bar" role="progressbar" style="width: 0"></div>
+        </div>
+
+    <div class="container px-lg-2 pb-3 bg-white">
+<section id="breadcrumb">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class="breadcrumb bg-transparent pl-lg-1 pl-2">
+            <li class="breadcrumb-item">
+                <a href="" class="text-dark font-weight-bold">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+            </li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/study-notes"
+                       class="text-dark font-weight-bold">学习笔记</a>
+                </li>
+            <li class="breadcrumb-item active" aria-current="page">博客迁移到 Raspberry Pi</li>
+        </ol>
+    </nav>
+</section>
+        <div class="row">
+            <div id="left" class="col-lg-8 pr-xl-5 px-lg-3 px-4">
+<section id="content" class="mb-5">
+    <h1 id="contentTitle">博客迁移到 Raspberry Pi</h1>
+    <small class="d-inline-block text-muted mt-2 ml-1">
+        <span class="mr-3">
+            <i class="fas fa-user mr-2"></i>Ryan Wang
+        </span>
+        <span class="mr-3">
+            <i class="far fa-calendar mr-2"></i>2019年12月23日
+        </span>
+        <span>
+            <i class="fas fa-eye mr-2"></i>270次浏览
+        </span>
+    </small>
+    <article class="markdown-body mt-4">
+        <html>
+ <head></head>
+ <body>
+  <blockquote> 
+   <p>本着爱折腾之心，今天将博客搬到了吃灰已久的 <code>Raspberry Pi 3B+</code>。好吧，其实也是之前一个热心的网友送了我一年<a href="http://www.zhexi.tech">哲西云</a>的内网穿透，一直没用，所以秉承着中华人民拒绝浪费的美好传统，折腾开始了...</p> 
+  </blockquote> 
+  <h2 id="配置"><a href="#配置" id="配置">配置</a></h2> 
+  <pre><code class="language-bash">    .',;:cc;,'.    .,;::c:,,.    root@raspberrypi
+   ,ooolcloooo:  'oooooccloo:    OS: Raspbian 10 buster
+   .looooc;;:ol  :oc;;:ooooo'    Kernel: armv7l Linux 4.19.75-v7+
+     ;oooooo:      ,ooooooc.     Uptime: 4h 4m
+       .,:;'.       .;:;'.       Packages: 588
+       .... ..'''''. ....        Shell: 5295
+     .''.   ..'''''.  ..''.      CPU: ARMv7 rev 4 (v7l) @ 1.4GHz
+     ..  .....    .....  ..      RAM: 386MiB / 926MiB
+    .  .'''''''  .''''''.  .
+  .'' .''''''''  .'''''''. ''.
+  '''  '''''''    .''''''  '''
+  .'    ........... ...    .'.
+    ....    ''''''''.   .''.
+    '''''.  ''''''''. .'''''
+     '''''.  .'''''. .'''''.
+      ..''.     .    .''..
+            .'''''''
+             ......
+</code></pre> 
+  <p>也就那样儿吧~</p> 
+  <h2 id="烧录镜像"><a href="#烧录镜像" id="烧录镜像">烧录镜像</a></h2> 
+  <p>这次搭建博客使用的镜像是官方的 <code>Raspbian Buster Lite</code>，之所以没选 <code>Desktop</code>，因为那玩意儿就是个玩具，没有实际用途，鹅且也不会用它，倒不如节省点内存。</p> 
+  <p>进入官网 <a href="https://www.raspberrypi.org/downloads/raspbian">https://www.raspberrypi.org/downloads/raspbian</a> ,找到 <code>Raspbian Buster Lite</code>，选择 <code>Download ZIP</code>。</p> 
+  <p>解压下载好的镜像得到 <code>xxxx-xx-xx-raspbian-buster-lite.img</code>。</p> 
+  <p>使用 <a href="https://github.com/balena-io/etcher">Etcher</a> 烧录镜像。当然，也有很多其他的烧录工具。</p> 
+  <h2 id="开启-ssh"><a href="#开启-ssh" id="开启-ssh">开启 SSH</a></h2> 
+  <p>这一步很简单，在烧录好的 SD 卡中，新建一个空白的 <code>ssh</code> 文件即可，需要注意的是，这个文件没有后缀，别搞个 <code>ssh.txt</code>、<code>ssh.avi</code> 啥的。</p> 
+  <h2 id="启动"><a href="#启动" id="启动">启动</a></h2> 
+  <p>插上 SD 和电源直接启动即可，默认用户名 <code>pi</code>，默认密码 <code>raspberry</code>，切换到 root 账户，<code>sudo su root</code>。</p> 
+  <h2 id="环境配置"><a href="#环境配置" id="环境配置">环境配置</a></h2> 
+  <p>Java</p> 
+  <pre><code class="language-bash">sudo apt-get install openjdk-8-jre-headless
+sudo apt-get install openjdk-8-jre
+</code></pre> 
+  <p>Vim</p> 
+  <pre><code class="language-bash">sudo apt-get install vim
+</code></pre> 
+  <p>Git</p> 
+  <pre><code class="language-bash">sudo apt-get install git
+</code></pre> 
+  <h2 id="迁移数据"><a href="#迁移数据" id="迁移数据">迁移数据</a></h2> 
+  <p>下载安装包</p> 
+  <pre><code>wget http://halo.ryanc.cc/release/halo-latest.jar -O halo-latest.jar
+</code></pre> 
+  <p>拉取备份的数据</p> 
+  <pre><code>git clone git@github.com:ruibaby/blog-data.git .halo
+</code></pre> 
+  <h2 id="启动-halo"><a href="#启动-halo" id="启动-halo">启动 Halo</a></h2> 
+  <pre><code>java -jar halo-latest.jar
+</code></pre> 
+  <p>测试没问题，再配置 <code>systemd</code> 进行管理，教程：<a href="https://halo.run/guide/install/install-with-linux.html#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE">https://halo.run/guide/install/install-with-linux.html#%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE</a>。</p> 
+  <h2 id="域名解析"><a href="#域名解析" id="域名解析">域名解析</a></h2> 
+  <p>由于我是直接是用的 <a href="https://www.upyun.com">又拍云 CDN</a> 进行回源，所以也不需要安装 Nginx 啥的了，这个内网穿透服务提供了一个 <code>CNAME</code>，去解析一下就完事了。</p> 
+  <h2 id="哲西云"><a href="#哲西云" id="哲西云">哲西云</a></h2> 
+  <p>如有需要，可以去 <a href="http://www.zhexi.tech">http://www.zhexi.tech</a> 体验体验。优惠码 <code>GRRVFM</code></p> 
+  <h2 id="展示"><a href="#展示" id="展示">展示</a></h2> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/56ffb0f522663785f4b031d595c1f6a0.png" alt="Snipaste_2019-12-24_12-35-16"></p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/d15419a817ec66336297bd8e08157508.png" alt="Snipaste_2019-12-24_12-36-10"></p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/758cfbd207c38b9db27a6bba295618a2.png" alt="raspberry-pi"></p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/9e22bcea8ac55cd0c8a82d2c49b083c8.png" alt="developer-mode-1"></p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/87e60eb23320ee7c00fb5ed66942f631.png" alt="developer-mode-2"></p> 
+ </body>
+</html>
+    </article>
+</section>
+<section id="changePost" class="mb-5">
+    <div class="d-flex px-1 flex-md-row flex-column">
+            <a id="prePost" class="mr-auto font-weight-bold text-muted">
+                <span class="icon mr-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-left"></i>
+                </span>
+                <span class="icon mr-2 d-md-none d-inline">
+                    上一篇：
+                </span>
+                前面没有了
+            </a>
+            <a id="nextPost" class="font-weight-bold mt-md-0 mt-3" href="/archives/flarum-install-and-config">
+                <span class="icon mr-2 d-md-none d-inline">
+                    下一篇：
+                </span>
+                Flarum 的安装与配置
+                <span class="icon ml-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
+            </a>
+    </div>
+</section>
+<div class="social-share-cs mb-5"></div>
+
+<section id="comment" class="mb-5">
+        <div>
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="http://localhost:8090/halo-comment.min.js?version=1.1.2"></script>
+        <halo-comment id="292" type="post"/>
+        </div>
+</section>            </div>
+            <div id="right" class="col-lg-4">
+        <section id="tags" class="mb-lg-4 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tags mr-2"></i>相关标签
+                </div>
+                <div class="card-body">
+                        <div class="tag">
+                            <a href="/tags/halo" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>Halo
+                                </span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/raspberrypi" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>Raspberry Pi
+                                </span>
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+            <section id="recommend" class="mb-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list-ul mr-2"></i>相关推荐</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                                    <a href="/archives/sql-99-biao"
+                                       class="list-group-item list-group-item-action">SQL变量和循环用法的体现-打印九九乘法表
+                                    </a>
+                                    <a href="/archives/halo-add-html-page"
+                                       class="list-group-item list-group-item-action">Halo-自助添加HTML静态页面
+                                    </a>
+                                    <a href="/archives/halo-star-100"
+                                       class="list-group-item list-group-item-action">Halo-Star过百
+                                    </a>
+                                    <a href="/archives/maven-use"
+                                       class="list-group-item list-group-item-action">Maven 使用笔记
+                                    </a>
+                                    <a href="/archives/halo-is-coming"
+                                       class="list-group-item list-group-item-action">Halo is coming。
+                                    </a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+<section id="catalogBox" class="d-none">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-book mr-2"></i>文章目录
+        </div>
+        <div id="catalogs" class="card-body p-0 pl-3">
+        </div>
+    </div>
+</section>            </div>
+        </div>
+    </div>
+
+        <div id="catalogButton" class="d-lg-none d-none">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
+        <div id="catalogOverBox" class="d-lg-none"></div>
+
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+        <script>
+            var displayReadProgress = true;
+            var displayLineNumber = true;
+            var enableCodeCopy = true;
+            var displayCodeType = true;
+            var displayMobileCatalog = true;
+            var linkOnBlackPage = true;
+            var enableShare = true;
+            var twitterAccountShare = ``;
+            var postTitle = `博客迁移到 Raspberry Pi`;
+            var blogTitle = `Ryan Wang's Blog`;
+            var blogUrl = ``;
+        </script>
+        <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="/codelunatic_simple/source/js/post.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>

@@ -1,0 +1,508 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width,
+              initial-scale=1,
+              minimum-scale=1.0,
+              maximum-scale=1.0,
+              user-scalable=no,
+              shrink-to-fit=no">
+            <meta name="keywords"
+                  content="Flarum,Nginx"/>
+        <meta name="description" content="Flarum 的安装与配置"/>
+        <meta name="site" content=""/>
+
+        <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/github-markdown.css">
+            <link rel="stylesheet" href="/codelunatic_simple/source/css/post.css">
+            <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/github.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+            <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/codelunatic_simple/source/css/style.css">
+
+        <meta name="robots" content="none">
+    <meta name="generator" content="Halo "/>
+    <script data-ad-client="ca-pub-5271828906478846" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <link rel="shortcut icon" type="images/x-icon" href="https://ryanc.cc/upload/2018/4/favicon.png">
+        <title>Flarum 的安装与配置 | Ryan Wang's Blog</title>
+    </head>
+    <body>
+<section id="navBar" class="border-bottom bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light container px-lg-2 py-3">
+
+        <a class="navbar-brand font-weight-bold" href="">
+                <img src="https://ryanc.cc/upload/2018/4/favicon.png" width="30" height="30"
+                     class="d-inline-block align-top mr-2" alt="Ryan Wang's Blog">
+            Ryan Wang's Blog
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse pl-1" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/archives" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Archives
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/links" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Links
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/journals" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                Journals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/s/about" target="_self">
+                                    <span class="d-lg-none d-inline mr-2"><i class="fas fa-link"></i></span>
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-lg-none d-inline mr-2"><i class="fas fa-list-ul"></i></span>
+                                分类
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="/categories/notes">日志
+                                        (7)</a>
+                                    <a class="dropdown-item" href="/categories/others">其他
+                                        (4)</a>
+                                    <a class="dropdown-item" href="/categories/study-notes">学习笔记
+                                        (31)</a>
+                                    <a class="dropdown-item" href="/categories/default">未分类
+                                        (0)</a>
+                                <a class="dropdown-item" href="/categories">
+                                    全部分类
+                                    (
+                                        35
+                                    )
+                                </a>
+
+                            </div>
+                        </li>
+            </ul>
+            <form id="search" class="form-inline my-2 my-lg-0" method="get" action="/search">
+                <input class="form-control mr-sm-2" name="keyword" type="search" value=""
+                       placeholder="请输入关键字" aria-label="请输入关键字" required autocomplete="off"
+                       data-toggle="tooltip" data-placement="bottom" title="输入查询关键字">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">查询</button>
+            </form>
+        </div>
+    </nav>
+</section>
+
+
+
+        <div id="readProgress">
+            <div class="read-progress-bar" role="progressbar" style="width: 0"></div>
+        </div>
+
+    <div class="container px-lg-2 pb-3 bg-white">
+<section id="breadcrumb">
+    <nav aria-label="breadcrumb" class="pt-4">
+        <ol class="breadcrumb bg-transparent pl-lg-1 pl-2">
+            <li class="breadcrumb-item">
+                <a href="" class="text-dark font-weight-bold">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+            </li>
+                <li class="breadcrumb-item">
+                    <a href="/categories/study-notes"
+                       class="text-dark font-weight-bold">学习笔记</a>
+                </li>
+            <li class="breadcrumb-item active" aria-current="page">Flarum 的安装与配置</li>
+        </ol>
+    </nav>
+</section>
+        <div class="row">
+            <div id="left" class="col-lg-8 pr-xl-5 px-lg-3 px-4">
+<section id="content" class="mb-5">
+    <h1 id="contentTitle">Flarum 的安装与配置</h1>
+    <small class="d-inline-block text-muted mt-2 ml-1">
+        <span class="mr-3">
+            <i class="fas fa-user mr-2"></i>Ryan Wang
+        </span>
+        <span class="mr-3">
+            <i class="far fa-calendar mr-2"></i>2019年11月18日
+        </span>
+        <span>
+            <i class="fas fa-eye mr-2"></i>1,347次浏览
+        </span>
+    </small>
+    <article class="markdown-body mt-4">
+        <html>
+ <head></head>
+ <body>
+  <blockquote> 
+   <p><a href="https://flarum.org">Flarum</a> 是一款非常棒的开源论坛程序，<a href="https://bbs.halo.run">Halo 的论坛</a> 就是用 Flarum 搭建的。之前有人问过我 Flarum 如何搭建，所以下面讲一下 Flarum 的搭建过程（btw，官方的搭建教程实在草率）。</p> 
+  </blockquote> 
+  <h2 id="前提">前提</h2> 
+  <ul> 
+   <li>域名需要提前解析。</li> 
+   <li>注意服务器是否需要备案，如果没备案，会被 x 掉。</li> 
+   <li>有一定的 Linux 基础。</li> 
+  </ul> 
+  <h2 id="环境说明">环境说明</h2> 
+  <ul> 
+   <li>Linux Server（本文是用的 CentOS 7.6）</li> 
+   <li>Apache 或者 Nginx（本文是用的 Nginx）</li> 
+   <li>PHP 7.1+</li> 
+   <li>PHP 拓展： curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip, fileinfo</li> 
+   <li>MySQL 5.6+ 或者 MariaDB 10.0.5+</li> 
+  </ul> 
+  <h2 id="部署环境安装">部署环境安装</h2> 
+  <h3 id="更新服务器软件包">更新服务器软件包</h3> 
+  <pre><code class="language-bash">yum update -y
+</code></pre> 
+  <h3 id="安装-nginxphpmysql">安装 Nginx/PHP/MySQL</h3> 
+  <blockquote> 
+   <p>这里我们使用 <a href="https://oneinstack.com">OneinStack</a> 一键安装，人生苦短，懒得自己编译了（绝不是因为我不会🌚）。当然，如果有时间，自己编译安装更好。</p> 
+  </blockquote> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/38771f8f695f99bd0539db42af0f2e69.png" alt="OneInStack"></p> 
+  <p>如上图，选择好需要的软件以及版本后，复制安装命令到服务器执行就行了，安装过程可能会有点慢，耐心等待就行了。</p> 
+  <blockquote> 
+   <p>需要注意的是，PHP 扩展中的 <code>fileinfo</code> 一定要勾选，Flarum 官方文档居然没有写需要这个扩展。(没错，这里我被坑了，嘤嘤嘤嘤~)</p> 
+  </blockquote> 
+  <p>安装完成应该会打印出这些东西： <img src="https://cdn.ryanc.cc/img/blog/thumbnails/6902ec905fc810f533910402cbd43662.png" alt="Oneinstack-success"></p> 
+  <h3 id="安装-composer">安装 Composer</h3> 
+  <pre><code class="language-bash">php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
+
+php composer-setup.php
+
+php -r "unlink('composer-setup.php');"
+
+mv composer.phar /usr/local/bin/composer
+</code></pre> 
+  <p>由于 <code>Composer</code> 的服务器在国外，可能导致下载 Flarum 已经依赖包会很慢，所以我们需要更换一下源地址。至于 <code>Composer</code> 是啥，其实就是 PHP 的一个包管理，类似 Java 的 <code>Maven</code> 和 <code>Gradle</code> 工具。</p> 
+  <pre><code class="language-bash">composer config -g repo.packagist composer https://packagist.phpcomposer.com
+</code></pre> 
+  <h2 id="安装-flarum">安装 Flarum</h2> 
+  <p>进入到 oneinstack 目录，执行 vhost.sh 脚本新建一个网站 <img src="https://cdn.ryanc.cc/img/blog/thumbnails/c608cda88c610ae302e895bf723e3515.png" alt="OneInStack-vhost"></p> 
+  <p>然后会提示 SSL 证书选项，网站目录之类的东西，按照自己的需求选择即可。</p> 
+  <p>创建完成后应该是这样子。</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/56c950fe8a52e135b217e75026d48de8.png" alt="OneInStack-new-site"></p> 
+  <p>然后进入网站目录执行：</p> 
+  <pre><code class="language-bash">composer create-project flarum/flarum . --stability=beta
+</code></pre> 
+  <p>然后等待下载 Flarum 以及对应的依赖即可，安装完成应该是这个样子的：</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/34286be66336e95f86ff2f59349cfa70.png" alt="Flarum-install-success"></p> 
+  <h2 id="配置运行">配置运行</h2> 
+  <p>上面其实就已经安装好了 Flarum，但是还需要进一步配置才能正确运行。</p> 
+  <h3 id="创建数据库">创建数据库</h3> 
+  <p>登陆 MySQL：</p> 
+  <pre><code class="language-bash">mysql -u root -p密码
+</code></pre> 
+  <p>创建数据库：</p> 
+  <pre><code class="language-bash">create database 数据库名 character set utf8mb4 collate utf8mb4_bin;
+</code></pre> 
+  <blockquote> 
+   <p>这里的字符集一定要是 <code>utf8mb4</code>，至于为什么是 <code>utf8mb4</code>，参考：<a href="https://www.jianshu.com/p/6967ce16a202">https://www.jianshu.com/p/6967ce16a202</a>。</p> 
+  </blockquote> 
+  <h3 id="修改-nginx-配置">修改 Nginx 配置</h3> 
+  <p>进入 Nginx 配置文件目录：</p> 
+  <pre><code>cd /usr/local/nginx/conf/vhost
+</code></pre> 
+  <p>修改网站的配置文件：</p> 
+  <pre><code>vim xxx.conf
+</code></pre> 
+  <p>需要修改的地方：</p> 
+  <ol> 
+   <li>root：需要在路径后面加上 <code>public</code>，比如我的原本是 <code>root /data/wwwroot/bbs.ryanwang.me;</code>，需要修改为 <code>root /data/wwwroot/bbs.ryanwang.me/public;</code>。</li> 
+   <li>引入 Flarum 提供的配置，在 server 大括号中任意位置加上 <code>include /data/wwwroot/xxx/.nginx.conf;</code>，<code>xxx</code> 为网站目录名。比如我的是 <code>include /data/wwwroot/bbs.ryanwang.me/.nginx.conf;</code></li> 
+  </ol> 
+  <p>最后的配置示例：</p> 
+  <pre><code class="language-nginx">server {
+  listen 80;
+  listen 443 ssl http2;
+  ssl_certificate /usr/local/nginx/conf/ssl/bbs.ryanwang.me.crt;
+  ssl_certificate_key /usr/local/nginx/conf/ssl/bbs.ryanwang.me.key;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+  ssl_ciphers TLS13-AES-256-GCM-SHA384:TLS13-CHACHA20-POLY1305-SHA256:TLS13-AES-128-GCM-SHA256:TLS13-AES-128-CCM-8-SHA256:TLS13-AES-128-CCM-SHA256:EECDH+CHACHA20:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+  ssl_prefer_server_ciphers on;
+  ssl_session_timeout 10m;
+  ssl_session_cache builtin:1000 shared:SSL:10m;
+  ssl_buffer_size 1400;
+  add_header Strict-Transport-Security max-age=15768000;
+  ssl_stapling on;
+  ssl_stapling_verify on;
+  server_name bbs.ryanwang.me;
+  access_log /data/wwwlogs/bbs.ryanwang.me_nginx.log combined;
+  index index.html index.htm index.php;
+  root /data/wwwroot/bbs.ryanwang.me/public;
+  if ($ssl_protocol = "") { return 301 https://$host$request_uri; }
+
+  include /usr/local/nginx/conf/rewrite/other.conf;
+  #error_page 404 /404.html;
+  #error_page 502 /502.html;
+
+  location ~ [^/]\.php(/|$) {
+    #fastcgi_pass remote_php_ip:9000;
+    fastcgi_pass unix:/dev/shm/php-cgi.sock;
+    fastcgi_index index.php;
+    include fastcgi.conf;
+  }
+
+  location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico)$ {
+    expires 30d;
+    access_log off;
+  }
+  location ~ .*\.(js|css)?$ {
+    expires 7d;
+    access_log off;
+  }
+  location ~ /(\.user\.ini|\.ht|\.git|\.svn|\.project|LICENSE|README\.md) {
+    deny all;
+  }
+  include /data/wwwroot/bbs.ryanwang.me/.nginx.conf;
+}
+
+</code></pre> 
+  <p>最后我们需要检查 Nginx 配置是否有误并重载 Nginx 配置：</p> 
+  <pre><code>nginx -t
+
+nginx: the configuration file /usr/local/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /usr/local/nginx/conf/nginx.conf test is successful
+</code></pre> 
+  <pre><code>nginx -s reload
+</code></pre> 
+  <h3 id="flarum-安装引导">Flarum 安装引导</h3> 
+  <p>如果出现下面的情况：</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/7243e69819dd45fe52789c07ad88351f.png" alt="Flarum-install-page-1"></p> 
+  <p>是因为没有对网站目录写入的权限，我们加一下权限即可：</p> 
+  <pre><code class="language-bash"># xxx 为网站目录名称
+chmod -R 777 /data/wwwroot/xxx
+</code></pre> 
+  <p>然后刷新页面就可以看到安装表单了。</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/6aa3c74ae3c3e54f7579b9ad34884dd8.png" alt="Flarum-install-page-2"></p> 
+  <p>然后填写数据库信息以及管理员信息，点击安装即可。</p> 
+  <p>安装部署部分到此结束。</p> 
+  <h2 id="常用插件安装">常用插件安装</h2> 
+  <blockquote> 
+   <p>安装完成后会发现不支持中文，所以我们需要安装中文语言包。还有一些常用的插件。</p> 
+  </blockquote> 
+  <p>进入网站目录：</p> 
+  <pre><code class="language-bash"># xxx 为网站目录名称
+cd /data/wwwroot/xxx
+</code></pre> 
+  <pre><code class="language-bash"># 简体中文语言包
+composer require csineneo/lang-simplified-chinese
+
+# 繁体中文语言包
+composer require csineneo/lang-traditional-chinese
+
+# 编辑器 Emoji 表情选择框
+composer require clarkwinkelmann/flarum-ext-emojionearea
+
+# Sitemap 生成器
+composer require flagrow/sitemap
+
+# Fancybox 插件
+composer require squeevee/flarum-ext-fancybox 
+</code></pre> 
+  <p>安装完成后去后台启用即可（后台地址：网址/admin）。</p> 
+  <p><img src="https://cdn.ryanc.cc/img/blog/thumbnails/168c9ee1aecd24300d8bdeb92755770b.png" alt="Flarum-extension"></p> 
+ </body>
+</html>
+    </article>
+</section>
+<section id="changePost" class="mb-5">
+    <div class="d-flex px-1 flex-md-row flex-column">
+            <a id="prePost" class="mr-auto font-weight-bold" href="/archives/blog-migration-to-raspberry-pi">
+                <span class="icon mr-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-left"></i>
+                </span>
+                <span class="icon mr-2 d-md-none d-inline">
+                    上一篇：
+                </span>
+                博客迁移到 Raspberry Pi
+            </a>
+            <a id="nextPost" class="font-weight-bold mt-md-0 mt-3" href="/archives/deploy-gridea-with-caddy">
+                <span class="icon mr-2 d-md-none d-inline">
+                    下一篇：
+                </span>
+                使用 Caddy 自动部署 Gridea 博客
+                <span class="icon ml-2 d-md-inline d-none">
+                    <i class="fas fa-angle-double-right"></i>
+                </span>
+            </a>
+    </div>
+</section>
+<div class="social-share-cs mb-5"></div>
+
+<section id="comment" class="mb-5">
+        <div>
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="http://localhost:8090/halo-comment.min.js?version=1.1.2"></script>
+        <halo-comment id="259" type="post"/>
+        </div>
+</section>            </div>
+            <div id="right" class="col-lg-4">
+        <section id="tags" class="mb-lg-4 mb-5">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-tags mr-2"></i>相关标签
+                </div>
+                <div class="card-body">
+                        <div class="tag">
+                            <a href="/tags/flarum" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>Flarum
+                                </span>
+                            </a>
+                        </div>
+                        <div class="tag">
+                            <a href="/tags/nginx" class="text-muted">
+                                <span class="tag-item">
+                                    <i class="fas fa-tags mr-1"></i>Nginx
+                                </span>
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+            <section id="recommend" class="mb-lg-4 mb-5">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list-ul mr-2"></i>相关推荐</div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                                    <a href="/archives/sql-99-biao"
+                                       class="list-group-item list-group-item-action">SQL变量和循环用法的体现-打印九九乘法表
+                                    </a>
+                                    <a href="/archives/halo-add-html-page"
+                                       class="list-group-item list-group-item-action">Halo-自助添加HTML静态页面
+                                    </a>
+                                    <a href="/archives/halo-star-100"
+                                       class="list-group-item list-group-item-action">Halo-Star过百
+                                    </a>
+                                    <a href="/archives/maven-use"
+                                       class="list-group-item list-group-item-action">Maven 使用笔记
+                                    </a>
+                                    <a href="/archives/halo-is-coming"
+                                       class="list-group-item list-group-item-action">Halo is coming。
+                                    </a>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+<section id="catalogBox" class="d-none">
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-book mr-2"></i>文章目录
+        </div>
+        <div id="catalogs" class="card-body p-0 pl-3">
+        </div>
+    </div>
+</section>            </div>
+        </div>
+    </div>
+
+        <div id="catalogButton" class="d-lg-none d-none">
+            <span><i class="fas fa-bars"></i></span>
+        </div>
+        <div id="catalogOverBox" class="d-lg-none"></div>
+
+
+    <!-- 公共BootStrap支持使用的JavaScript -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<footer class="py-4 border-top bg-white">
+    <div class="container d-flex flex-md-row flex-column justify-content-between align-items-center px-lg-2">
+        <div>
+            <span class="text-muted">    <br />
+Server on Raspberry Pi
+<br />
+<a href="https://www.upyun.com/" target="_blank"><img src="/upload/2018/5/又拍云_logo5.png" style="width:48px"></img></a>
+<script>
+console.log("%c    __  __      __\n" +
+                "   / / / /___ _/ /___\n" +
+                "  / /_/ / __ `/ / __ \\\n" +
+                " / __  / /_/ / / /_/ /\n" +
+                "/_/ /_/\\__,_/_/\\____/ %c v1.1.1 https://github.com/halo-dev/halo","color:#4571ca;","color:red");
+</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110780416-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-110780416-1');
+</script>
+</span>
+            <span class="text-muted font-weight-bold"> Thank for <a
+                        href="https://github.com/halo-dev/halo">Halo</a></span>
+        </div>
+        <div class="link-info mt-md-0 mt-4">
+                <a class="text-dark mr-3" target="_blank" href="/feed.xml">
+                    <i class="fas fa-rss"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://github.com/ruibaby">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="http://wpa.qq.com/msgrd?v=3&uin=709831589&site=qq&menu=yes">
+                    <i class="fab fa-qq"></i>
+                </a>
+                <a class="text-dark mr-3" target="_blank"
+                   href="https://twitter.com/slpwry">
+                    <i class="fab fa-twitter"></i>
+                </a>
+        </div>
+    </div>
+</footer>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/index.js"></script>
+    <script type="text/javascript" src="/codelunatic_simple/source/js/navbar.js"></script>
+        <script>
+            var displayReadProgress = true;
+            var displayLineNumber = true;
+            var enableCodeCopy = true;
+            var displayCodeType = true;
+            var displayMobileCatalog = true;
+            var linkOnBlackPage = true;
+            var enableShare = true;
+            var twitterAccountShare = ``;
+            var postTitle = `Flarum 的安装与配置`;
+            var blogTitle = `Ryan Wang's Blog`;
+            var blogUrl = ``;
+        </script>
+        <script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+        <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js"></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="/codelunatic_simple/source/js/post.js"></script>
+    <div id="backTop" class="back-top">
+        <span><i class="fas fa-caret-up"></i></span>
+    </div>
+    </body>
+    </html>
